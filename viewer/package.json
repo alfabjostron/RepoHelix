@@ -1,0 +1,15 @@
+{
+  "name": "repohelix-viewer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dependency-free interactive helix / co-change atlas viewer for repohelix",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsc -p tsconfig.test.json && node dist-test/test/viewer.test.js"
+  },
+  "devDependencies": {
+    "typescript": "5.4.5"
+  }
