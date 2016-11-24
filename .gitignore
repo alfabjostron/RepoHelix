@@ -1,0 +1,20 @@
+# Rust
+/target/
+**/*.rs.bk
+
+# Node / TypeScript viewer build artifacts
+viewer/node_modules/
+viewer/dist/
+viewer/dist-test/
+viewer/package-lock.json
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Local scratch output
+*.log.json
+/out.json
