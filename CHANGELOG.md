@@ -16,3 +16,8 @@ dependency-free TypeScript viewer.
 - **Live repository analysis** via non-interactive `git log --numstat`
   (`--no-pager`, `--no-color`, `--no-renames`, and batch-forcing environment
   variables).
+- **Fixture-log import** (`--log`) that reuses the live parser for byte-for-byte
+  reproducible demos and CI.
+- **Metrics**: per-file churn, hotspots (geometric mean of normalized churn and
+  frequency), temporal coupling (Jaccard strength + association confidence),
+  temporal clusters (session detection by time gap), and ownership concentration
