@@ -25,3 +25,8 @@ dependency-free TypeScript viewer.
 - **Reports**: pretty/compact JSON (`schema: repohelix/analysis/v1`) and a text
   table report, both carrying the "not a personnel judgment" reminder.
 - **Viewer payload** builder (`schema: repohelix/viewer/v1`), capped at 64 nodes.
+- **Minimal std-only JSON writer** with correct escaping, stable key order, and
+  finite-number safety.
+- **TypeScript viewer**: DOM/SVG-only helix and co-change atlas with hover
+  tooltips, split into a pure `core` module and an SVG-rendering module.
+- **Synthetic fixture** `fixtures/nebula.gitlog` modeling four development
