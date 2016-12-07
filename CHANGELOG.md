@@ -34,3 +34,8 @@ dependency-free TypeScript viewer.
 - **Documentation**: a 15–22 KB README with the DNA/cartography identity, two
   local animated SVGs, and `docs/MODEL.md` defining every formula and the ethics
   of interpretation.
+- **Tests**: 41 Rust unit + integration tests and a zero-framework TypeScript
+  core test suite.
+- **Tooling**: `Makefile`, GitHub Actions CI, MIT `LICENSE`.
+
+### Known limitations
