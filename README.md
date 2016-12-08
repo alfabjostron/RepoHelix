@@ -130,3 +130,20 @@ cargo run -- viewer-data --log fixtures/nebula.gitlog --out viewer/data.json
 ```
 
 The text report for the fixture opens like this (abridged):
+
+```
+repohelix — Git history analysis
+================================
+
+Summary
+  commits ......... 24
+  files ........... 18
+  authors ......... 4
+  total churn ..... 2744
+  span (days) ..... 20
+
+Top hotspots (churn x frequency)
+  path                                       churn commits   score
+  src/handlers.rs                              684      10   1.000
+  src/router.rs                                410       9   0.734
+  src/storage.rs                               343       7   0.592
