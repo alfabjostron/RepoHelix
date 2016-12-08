@@ -42,3 +42,21 @@ Two complementary readings fall out of that lens:
   **temporal coupling** — two files that change in lockstep even if they live in
   different directories. This is the map that reveals hidden dependencies and
   missing abstractions.
+
+The two views answer different questions. The helix asks *"where does effort and
+risk accumulate over time?"* The atlas asks *"what is secretly wired to what?"*
+
+> **A promise up front:** every number `repohelix` produces describes *code and
+> change activity* — never people. Ownership concentration is a knowledge-risk
+> signal (the classic *bus factor*), not a performance score. See
+> [Metrics are not about people](#metrics-are-not-about-people) and
+> [`docs/MODEL.md`](docs/MODEL.md).
+
+---
+
+## Table of contents
+
+- [Feature tour](#feature-tour)
+- [Install and build](#install-and-build)
+- [Quick start (30 seconds)](#quick-start-30-seconds)
+- [The command line](#the-command-line)
