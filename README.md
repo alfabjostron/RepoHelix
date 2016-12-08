@@ -60,3 +60,20 @@ risk accumulate over time?"* The atlas asks *"what is secretly wired to what?"*
 - [Install and build](#install-and-build)
 - [Quick start (30 seconds)](#quick-start-30-seconds)
 - [The command line](#the-command-line)
+- [What it computes](#what-it-computes)
+- [Output formats](#output-formats)
+- [The interactive viewer](#the-interactive-viewer)
+- [The fixture format (deterministic demos)](#the-fixture-format-deterministic-demos)
+- [Architecture](#architecture)
+- [Metrics are not about people](#metrics-are-not-about-people)
+- [Testing](#testing)
+- [Design constraints](#design-constraints)
+- [FAQ](#faq)
+- [License](#license)
+
+---
+
+## Feature tour
+
+| Capability                    | What you get                                                                 |
+| ----------------------------- | ---------------------------------------------------------------------------- |
