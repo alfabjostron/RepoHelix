@@ -200,3 +200,20 @@ on a prompt, or emit ANSI colour into your pipeline.
 
 ## What it computes
 
+A one-paragraph summary of each metric; the precise formulas live in
+[`docs/MODEL.md`](docs/MODEL.md).
+
+- **Churn** — total lines added plus removed per file. The rawest activity
+  signal. Binary edits count as one unit so they still register.
+- **Hotspots** — `sqrt(normalizedChurn · normalizedFrequency)`. Only files that
+  are *both* large and frequently edited rise to the top; a huge one-shot import
+  or a trivial repeated tweak both score low.
+- **Temporal coupling** — for a file pair, `strength = together / (a + b −
+  together)` (Jaccard) and `confidence = together / max(a, b)` (association
+  rule). Guarded by a minimum co-occurrence and a max-files-per-commit filter so
+  bulk commits don't manufacture fake coupling.
+- **Temporal clusters** — commits sorted by time and split wherever the gap
+  exceeds the threshold. Each cluster is a development *session* with its own
+  commit count, file span, and churn.
+- **Ownership concentration** — a normalized Herfindahl index of per-file commit
+  shares in `[0, 1]`. `1.0` = one identity made every change (bus factor of
