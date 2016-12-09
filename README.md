@@ -217,3 +217,21 @@ A one-paragraph summary of each metric; the precise formulas live in
   commit count, file span, and churn.
 - **Ownership concentration** — a normalized Herfindahl index of per-file commit
   shares in `[0, 1]`. `1.0` = one identity made every change (bus factor of
+  one); low = shared stewardship. Identities are reported as anonymized labels.
+
+---
+
+## Output formats
+
+### Text
+
+A compact terminal report with a summary block and four ranked tables
+(hotspots, coupling, ownership, clusters). Every text report ends with the
+reminder that the metrics describe code, not people.
+
+### JSON (`schema: repohelix/analysis/v1`)
+
+A stable, sorted document with top-level keys `summary`, `files`, `cochanges`,
+`hotspots`, `ownership`, and `clusters`, plus a `disclaimer` string embedded in
+the payload itself. Pretty by default; `--compact` for pipelines.
+
