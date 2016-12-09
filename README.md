@@ -182,3 +182,21 @@ SOURCE (pick one; defaults to --repo .)
 ANALYZE OPTIONS
   --format <json|text>      Output format (default: text)
   --compact                 Compact JSON instead of pretty
+  --max-commits <n>         Limit history depth (newest n commits)
+  --out <file>              Write to a file instead of stdout
+  --min-cochange <n>        Minimum co-change count to report (default: 2)
+  --top-cochange <n>        Max co-change pairs (default: 40)
+  --top-hotspots <n>        Max hotspots (default: 20)
+  --cluster-gap <secs>      Session gap threshold (default: 21600 = 6h)
+  --max-files-cochange <n>  Skip huge commits for coupling (default: 40)
+```
+
+Every git invocation sets `GIT_PAGER=cat`, `GIT_TERMINAL_PROMPT=0`,
+`GIT_OPTIONAL_LOCKS=0`, `GIT_CONFIG_NOSYSTEM=1`, and `LC_ALL=C`, plus the
+`--no-pager --no-color --no-renames` flags. It will never open an editor, block
+on a prompt, or emit ANSI colour into your pipeline.
+
+---
+
+## What it computes
+
