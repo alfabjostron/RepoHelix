@@ -147,3 +147,21 @@ Top hotspots (churn x frequency)
   src/handlers.rs                              684      10   1.000
   src/router.rs                                410       9   0.734
   src/storage.rs                               343       7   0.592
+  ...
+
+Strongest temporal coupling (co-change)
+    str  conf file A                     file B
+   0.58  0.70 src/handlers.rs            src/router.rs
+   0.38  0.43 Cargo.toml                 src/lib.rs
+   ...
+
+Note: these metrics describe code and change activity, not people.
+```
+
+`handlers.rs` is the clear hotspot, and `handlers.rs ↔ router.rs` is the tightest
+coupling — exactly what the fixture's story (a router wired to handlers, then
+repeatedly refactored together) is designed to reveal.
+
+---
+
+## The command line
