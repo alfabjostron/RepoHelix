@@ -252,3 +252,21 @@ The bundled JSON writer (`src/json.rs`) escapes correctly, preserves key order,
 trims float noise, and emits `null` for non-finite numbers so the output is
 always valid JSON.
 
+### Viewer payload (`schema: repohelix/viewer/v1`)
+
+A minimal graph: `nodes` (files with churn/commits/authors/concentration/time),
+`links` (co-change pairs referencing node indices), and `clusters`. Capped at 64
+nodes so the browser render stays smooth and the file stays tiny.
+
+---
+
+## The interactive viewer
+
+The `viewer/` directory holds a dependency-free TypeScript app that renders the
+payload as the same helix + atlas you see at the top of this README — but
+interactive, with hover tooltips.
+
+```sh
+cd viewer
+npm run build       # tsc → dist/viewer.js (+ dist/core.js)
+
