@@ -270,3 +270,20 @@ interactive, with hover tooltips.
 cd viewer
 npm run build       # tsc → dist/viewer.js (+ dist/core.js)
 
+# Regenerate the embedded demo dataset from the fixture (Windows PowerShell):
+pwsh -File ../scripts/gen_viewer_data.ps1   # writes viewer/data.js
+
+# Then open viewer/index.html in any browser. It loads data.js locally.
+```
+
+The viewer is split into two modules:
+
+- **`src/core.ts`** — pure, DOM-free math and data shaping (colour ramps, churn
+  scaling, ring layout, ordering, validation, summary text). This is what the
+  unit tests exercise under plain Node.
+- **`src/viewer.ts`** — the SVG rendering built on top of `core`, plus the
+  auto-mount glue.
+
+No framework, no bundler, no CDN, no network. The only dev dependency is
+TypeScript itself, and even that is optional if you write the JS by hand.
+
