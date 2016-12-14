@@ -305,3 +305,20 @@ pwsh -File scripts/gen_fixture.ps1     # writes fixtures/nebula.gitlog
 The generator encodes a deliberate story across four development sessions
 (clusters): a bootstrap, a data layer, a feature push, and a hardening pass. That
 story is what produces the hotspot on `handlers.rs`, the strong
+`handlers ↔ router` coupling, and the single-owner files like `migrate.rs`. The
+integration tests assert on exactly these outcomes, so the fixture doubles as a
+golden dataset.
+
+To capture your *own* fixture from a real repo, run `repohelix analyze --repo .`
+inside it — or record git's raw output — and store it under `fixtures/`.
+
+---
+
+## Architecture
+
+```
+repohelix/
+├── Cargo.toml, Cargo.lock      # zero-dependency Rust manifest
+├── src/
+│   ├── main.rs                 # CLI entry point, output emission
+│   ├── lib.rs                  # public API, pipeline (load_from_repo/log)
