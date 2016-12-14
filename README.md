@@ -287,3 +287,21 @@ The viewer is split into two modules:
 No framework, no bundler, no CDN, no network. The only dev dependency is
 TypeScript itself, and even that is optional if you write the JS by hand.
 
+---
+
+## The fixture format (deterministic demos)
+
+A **fixture log** is simply captured `git log --numstat` output using the custom
+record/field separators `repohelix` requests. Because the parser is the same one
+used for live repositories, a fixture behaves identically to a real repo — but is
+byte-for-byte reproducible.
+
+Regenerate the bundled `nebula` fixture with:
+
+```sh
+pwsh -File scripts/gen_fixture.ps1     # writes fixtures/nebula.gitlog
+```
+
+The generator encodes a deliberate story across four development sessions
+(clusters): a bootstrap, a data layer, a feature push, and a hardening pass. That
+story is what produces the hotspot on `handlers.rs`, the strong
