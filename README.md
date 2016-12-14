@@ -340,3 +340,20 @@ repohelix/
 │   ├── tsconfig.json           # browser build
 │   └── tsconfig.test.json      # Node test build
 ├── docs/
+│   ├── MODEL.md                # exact formulas + ethics
+│   └── assets/*.svg            # the two animated maps
+├── scripts/                    # fixture + viewer-data generators
+├── Makefile, .github/workflows/ci.yml
+├── LICENSE (MIT), CHANGELOG.md
+```
+
+The dependency graph is a straight pipeline: `git`/file → `parse` → `model` →
+`metrics` → `report`/`viewer`. `json` and `model` sit at the bottom with no
+internal dependencies, which is why they are the most heavily unit-tested.
+
+---
+
+## Metrics are not about people
+
+This deserves its own section because it is the single easiest thing to get
+wrong with a history tool.
