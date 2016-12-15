@@ -357,3 +357,21 @@ internal dependencies, which is why they are the most heavily unit-tested.
 
 This deserves its own section because it is the single easiest thing to get
 wrong with a history tool.
+
+Everything `repohelix` measures is a property of **files and change events**.
+None of it measures a person's productivity, skill, effort, or worth.
+
+- **Churn and commit counts** reflect the nature of the code. Generated files,
+  lockfiles, dispatch tables, and integration points churn heavily *by design*.
+  Attributing that to the person who touched them is a category error.
+- **Ownership concentration** is a *risk* signal about where knowledge is thin —
+  the *bus factor*. A concentration of `1.0` means the project is exposed if that
+  knowledge becomes unavailable. The response is pairing, review, and
+  documentation. It is never a reason to praise or blame an individual.
+- **Hotspots** point at *code* that may want refactoring or more tests. They say
+  nothing about the authors of that code.
+- **Temporal coupling** describes *files*, not teams.
+
+Because casual misuse is so tempting, the ownership report **anonymizes**
+identities (`author#1`, `author#2`, …). Raw names and emails are used only as
+grouping keys and never appear in the output. Using any of these numbers to
