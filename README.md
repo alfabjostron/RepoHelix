@@ -375,3 +375,20 @@ None of it measures a person's productivity, skill, effort, or worth.
 Because casual misuse is so tempting, the ownership report **anonymizes**
 identities (`author#1`, `author#2`, …). Raw names and emails are used only as
 grouping keys and never appear in the output. Using any of these numbers to
+rank, reward, or penalize individuals is both a misuse of the tool and
+statistically unsound — the signals are confounded by role, tenure, file type,
+and task assignment. Read [`docs/MODEL.md`](docs/MODEL.md) for the full argument.
+
+---
+
+## Testing
+
+```sh
+# Rust unit + integration tests (41 total).
+cargo test
+
+# TypeScript core tests (zero framework, plain Node).
+cd viewer && npm test
+
+# Everything, plus format/lint, via the Makefile.
+make check
