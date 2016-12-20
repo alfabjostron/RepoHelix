@@ -14,3 +14,11 @@ pub struct FileChange {
     /// Lines removed. `None` for binary files.
     pub removed: Option<u64>,
 }
+
+impl FileChange {
+    /// Total churn (added + removed) for this change, treating binary edits as
+    /// a single unit of churn so they still register as activity.
+    pub fn churn(&self) -> u64 {
+        match (self.added, self.removed) {
+            (Some(a), Some(r)) => a + r,
+            _ => 1,
