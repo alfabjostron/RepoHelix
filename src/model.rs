@@ -30,3 +30,10 @@ impl FileChange {
         self.added.is_none() && self.removed.is_none()
     }
 }
+
+/// One commit with its metadata and the files it touched.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Commit {
+    /// Abbreviated or full commit hash.
+    pub hash: String,
+    /// Author display name.
