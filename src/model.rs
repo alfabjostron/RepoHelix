@@ -22,3 +22,11 @@ impl FileChange {
         match (self.added, self.removed) {
             (Some(a), Some(r)) => a + r,
             _ => 1,
+        }
+    }
+
+    /// Whether this change is binary (no textual line counts).
+    pub fn is_binary(&self) -> bool {
+        self.added.is_none() && self.removed.is_none()
+    }
+}
