@@ -37,3 +37,11 @@ pub struct Commit {
     /// Abbreviated or full commit hash.
     pub hash: String,
     /// Author display name.
+    pub author_name: String,
+    /// Author email (used as the stable identity key for ownership).
+    pub author_email: String,
+    /// Author timestamp as Unix epoch seconds.
+    pub timestamp: i64,
+    /// First line of the commit message (the subject).
+    pub subject: String,
+    /// Files changed by this commit.
