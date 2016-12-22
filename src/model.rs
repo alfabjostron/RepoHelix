@@ -45,3 +45,11 @@ pub struct Commit {
     /// First line of the commit message (the subject).
     pub subject: String,
     /// Files changed by this commit.
+    pub files: Vec<FileChange>,
+}
+
+impl Commit {
+    /// The identity used for ownership aggregation. Email is preferred because
+    /// it is more stable than display names, which vary across machines.
+    pub fn identity(&self) -> &str {
+        if self.author_email.is_empty() {
