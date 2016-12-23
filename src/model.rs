@@ -60,3 +60,11 @@ impl Commit {
     }
 }
 
+/// The full parsed history: an ordered list of commits (newest first, as Git
+/// emits them by default).
+#[derive(Debug, Clone, Default, PartialEq, Eq)]
+pub struct History {
+    pub commits: Vec<Commit>,
+}
+
+impl History {
