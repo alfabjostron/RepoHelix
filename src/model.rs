@@ -53,3 +53,10 @@ impl Commit {
     /// it is more stable than display names, which vary across machines.
     pub fn identity(&self) -> &str {
         if self.author_email.is_empty() {
+            &self.author_name
+        } else {
+            &self.author_email
+        }
+    }
+}
+
