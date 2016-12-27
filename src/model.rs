@@ -68,3 +68,10 @@ pub struct History {
 }
 
 impl History {
+    pub fn new(commits: Vec<Commit>) -> Self {
+        History { commits }
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.commits.is_empty()
+    }
