@@ -83,3 +83,14 @@ fn parse_numstat_line(line: &str) -> Option<FileChange> {
     let removed_s = parts.next()?.trim();
     let path = parts.next()?.trim();
 
+    if path.is_empty() {
+        return None;
+    }
+
+    let added = if added_s == "-" {
+        None
+    } else {
+        added_s.parse::<u64>().ok()
+    };
+    let removed = if removed_s == "-" {
+        None
