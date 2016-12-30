@@ -48,3 +48,15 @@ fn parse_record(record: &str) -> Option<Commit> {
     // Subject may itself contain the field separator only if authored oddly;
     // rejoin the remainder to be safe.
     let subject_parts: Vec<&str> = fields.collect();
+    let subject = subject_parts.join(&FIELD_SEP.to_string());
+
+    if hash.is_empty() {
+        return None;
+    }
+
+    let mut files = Vec::new();
+    for line in lines {
+        let line = line.trim_end_matches('\r');
+        if line.trim().is_empty() {
+            continue;
+        }
