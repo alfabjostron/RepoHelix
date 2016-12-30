@@ -105,3 +105,15 @@ fn parse_numstat_line(line: &str) -> Option<FileChange> {
     })
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn sample_log() -> String {
+        // Two commits: newest first, as git emits.
+        format!(
+            "{sep}abc123{fs}Ada Lovelace{fs}ada@example.org{fs}1700000200{fs}Refactor engine\n\
+             10\t2\tsrc/engine.rs\n\
+             3\t0\tsrc/lib.rs\n\
+             {sep}def456{fs}Grace Hopper{fs}grace@example.org{fs}1700000100{fs}Initial commit\n\
+             40\t0\tsrc/engine.rs\n\
