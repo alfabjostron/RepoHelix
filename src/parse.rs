@@ -26,3 +26,14 @@ pub fn parse_log(raw: &str) -> History {
             continue;
         }
         if let Some(commit) = parse_record(record) {
+            commits.push(commit);
+        }
+    }
+
+    History::new(commits)
+}
+
+fn parse_record(record: &str) -> Option<Commit> {
+    let mut lines = record.lines();
+    let header = lines.next()?;
+
