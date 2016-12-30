@@ -60,3 +60,14 @@ fn parse_record(record: &str) -> Option<Commit> {
         if line.trim().is_empty() {
             continue;
         }
+        if let Some(fc) = parse_numstat_line(line) {
+            files.push(fc);
+        }
+    }
+
+    Some(Commit {
+        hash,
+        author_name,
+        author_email,
+        timestamp,
+        subject: subject.trim().to_string(),
