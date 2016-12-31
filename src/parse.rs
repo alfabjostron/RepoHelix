@@ -128,3 +128,15 @@ mod tests {
         let h = parse_log(&sample_log());
         assert_eq!(h.commit_count(), 2);
         let first = &h.commits[0];
+        assert_eq!(first.hash, "abc123");
+        assert_eq!(first.author_name, "Ada Lovelace");
+        assert_eq!(first.author_email, "ada@example.org");
+        assert_eq!(first.timestamp, 1700000200);
+        assert_eq!(first.subject, "Refactor engine");
+        assert_eq!(first.files.len(), 2);
+        assert_eq!(first.files[0].added, Some(10));
+        assert_eq!(first.files[0].removed, Some(2));
+    }
+
+    #[test]
+    fn handles_binary_files() {
