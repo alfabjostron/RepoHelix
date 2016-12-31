@@ -117,3 +117,14 @@ mod tests {
              3\t0\tsrc/lib.rs\n\
              {sep}def456{fs}Grace Hopper{fs}grace@example.org{fs}1700000100{fs}Initial commit\n\
              40\t0\tsrc/engine.rs\n\
+             -\t-\tassets/logo.png\n",
+            sep = COMMIT_SEP,
+            fs = "\x1f"
+        )
+    }
+
+    #[test]
+    fn parses_two_commits() {
+        let h = parse_log(&sample_log());
+        assert_eq!(h.commit_count(), 2);
+        let first = &h.commits[0];
