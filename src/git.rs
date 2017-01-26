@@ -16,3 +16,11 @@ pub const COMMIT_SEP: &str = "\x1eREPOHELIX_COMMIT\x1e";
 /// Field separator within a commit header line (ASCII unit separator).
 pub const FIELD_SEP: char = '\x1f';
 
+/// Errors that can occur while talking to git.
+#[derive(Debug)]
+pub enum GitError {
+    /// The git process could not be spawned (e.g. git not installed).
+    Spawn(io::Error),
+    /// git ran but exited with a non-zero status.
+    Failed { code: Option<i32>, stderr: String },
+    /// Output was not valid UTF-8.
