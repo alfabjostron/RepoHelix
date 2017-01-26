@@ -24,3 +24,11 @@ pub enum GitError {
     /// git ran but exited with a non-zero status.
     Failed { code: Option<i32>, stderr: String },
     /// Output was not valid UTF-8.
+    Encoding,
+}
+
+impl std::fmt::Display for GitError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            GitError::Spawn(e) => write!(f, "could not run git: {e}"),
+            GitError::Failed { code, stderr } => {
