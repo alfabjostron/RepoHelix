@@ -32,3 +32,12 @@ impl std::fmt::Display for GitError {
         match self {
             GitError::Spawn(e) => write!(f, "could not run git: {e}"),
             GitError::Failed { code, stderr } => {
+                let code = code
+                    .map(|c| c.to_string())
+                    .unwrap_or_else(|| "signal".into());
+                write!(f, "git exited with status {code}: {}", stderr.trim())
+            }
+            GitError::Encoding => write!(f, "git produced non-UTF-8 output"),
+        }
+    }
+}
