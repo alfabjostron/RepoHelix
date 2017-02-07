@@ -41,3 +41,11 @@ impl std::fmt::Display for GitError {
         }
     }
 }
+
+impl std::error::Error for GitError {}
+
+/// The custom pretty format we request from `git log`. Fields, in order:
+/// hash, author name, author email, author unix time, subject.
+fn pretty_format() -> String {
+    // %x1e is the record separator; %x1f delimits fields on the header line.
+    // The trailing separator lets us split cleanly before numstat lines.
