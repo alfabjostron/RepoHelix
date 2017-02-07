@@ -49,3 +49,11 @@ impl std::error::Error for GitError {}
 fn pretty_format() -> String {
     // %x1e is the record separator; %x1f delimits fields on the header line.
     // The trailing separator lets us split cleanly before numstat lines.
+    format!(
+        "{sep}%H{fs}%an{fs}%ae{fs}%at{fs}%s",
+        sep = COMMIT_SEP,
+        fs = "\x1f"
+    )
+}
+
+/// Run `git log` in the given repository and return raw stdout.
