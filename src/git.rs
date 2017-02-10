@@ -73,3 +73,11 @@ pub fn run_log(repo: &Path, max_commits: Option<usize>) -> Result<String, GitErr
         .arg(format!("--pretty=format:{}", pretty_format()));
 
     if let Some(n) = max_commits {
+        cmd.arg(format!("-n{}", n));
+    }
+
+    // Force batch behavior regardless of user git config.
+    cmd.env("GIT_PAGER", "cat");
+    cmd.env("GIT_TERMINAL_PROMPT", "0");
+    cmd.env("GIT_OPTIONAL_LOCKS", "0");
+    cmd.env("GIT_CONFIG_NOSYSTEM", "1");
