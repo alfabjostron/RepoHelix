@@ -65,3 +65,11 @@ pub fn run_log(repo: &Path, max_commits: Option<usize>) -> Result<String, GitErr
     cmd.arg("-C")
         .arg(repo)
         // Disable any pager unconditionally.
+        .arg("--no-pager")
+        .arg("log")
+        .arg("--no-color")
+        .arg("--no-renames")
+        .arg("--numstat")
+        .arg(format!("--pretty=format:{}", pretty_format()));
+
+    if let Some(n) = max_commits {
