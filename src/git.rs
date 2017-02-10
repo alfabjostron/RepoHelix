@@ -57,3 +57,11 @@ fn pretty_format() -> String {
 }
 
 /// Run `git log` in the given repository and return raw stdout.
+///
+/// `max_commits` optionally caps history depth. The command is fully
+/// non-interactive: no pager, no color, no prompts.
+pub fn run_log(repo: &Path, max_commits: Option<usize>) -> Result<String, GitError> {
+    let mut cmd = Command::new("git");
+    cmd.arg("-C")
+        .arg(repo)
+        // Disable any pager unconditionally.
