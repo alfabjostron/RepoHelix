@@ -81,3 +81,11 @@ pub fn run_log(repo: &Path, max_commits: Option<usize>) -> Result<String, GitErr
     cmd.env("GIT_TERMINAL_PROMPT", "0");
     cmd.env("GIT_OPTIONAL_LOCKS", "0");
     cmd.env("GIT_CONFIG_NOSYSTEM", "1");
+    cmd.env("LC_ALL", "C");
+
+    let output = cmd.output().map_err(GitError::Spawn)?;
+    if !output.status.success() {
+        let stderr = String::from_utf8_lossy(&output.stderr).into_owned();
+        return Err(GitError::Failed {
+            code: output.status.code(),
+            stderr,
