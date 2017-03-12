@@ -43,3 +43,15 @@ impl Json {
     pub fn to_pretty(&self) -> String {
         let mut out = String::new();
         self.write_pretty(&mut out, 0);
+        out
+    }
+
+    fn write_compact(&self, out: &mut String) {
+        match self {
+            Json::Null => out.push_str("null"),
+            Json::Bool(b) => out.push_str(if *b { "true" } else { "false" }),
+            Json::Int(n) => {
+                let _ = write!(out, "{}", n);
+            }
+            Json::Float(f) => out.push_str(&format_float(*f)),
+            Json::Str(s) => write_json_string(out, s),
