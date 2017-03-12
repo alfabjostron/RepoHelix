@@ -55,3 +55,15 @@ impl Json {
             }
             Json::Float(f) => out.push_str(&format_float(*f)),
             Json::Str(s) => write_json_string(out, s),
+            Json::Array(items) => {
+                out.push('[');
+                for (i, item) in items.iter().enumerate() {
+                    if i > 0 {
+                        out.push(',');
+                    }
+                    item.write_compact(out);
+                }
+                out.push(']');
+            }
+            Json::Object(pairs) => {
+                out.push('{');
