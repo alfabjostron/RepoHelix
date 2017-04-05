@@ -116,3 +116,15 @@ impl Json {
     }
 }
 
+fn push_indent(out: &mut String, level: usize) {
+    for _ in 0..level {
+        out.push_str("  ");
+    }
+}
+
+/// Format a float without a trailing `.0`-only ambiguity while staying valid
+/// JSON. Non-finite values are emitted as `null` (JSON has no NaN/Infinity).
+fn format_float(f: f64) -> String {
+    if !f.is_finite() {
+        return "null".to_string();
+    }
