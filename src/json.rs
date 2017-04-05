@@ -79,3 +79,15 @@ impl Json {
             }
         }
     }
+
+    fn write_pretty(&self, out: &mut String, indent: usize) {
+        match self {
+            Json::Array(items) if !items.is_empty() => {
+                out.push_str("[\n");
+                for (i, item) in items.iter().enumerate() {
+                    push_indent(out, indent + 1);
+                    item.write_pretty(out, indent + 1);
+                    if i + 1 < items.len() {
+                        out.push(',');
+                    }
+                    out.push('\n');
