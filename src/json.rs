@@ -104,3 +104,15 @@ impl Json {
                     v.write_pretty(out, indent + 1);
                     if i + 1 < pairs.len() {
                         out.push(',');
+                    }
+                    out.push('\n');
+                }
+                push_indent(out, indent);
+                out.push('}');
+            }
+            // Empty containers and scalars fall back to the compact form.
+            _ => self.write_compact(out),
+        }
+    }
+}
+
