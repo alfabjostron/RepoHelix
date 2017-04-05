@@ -91,3 +91,16 @@ impl Json {
                         out.push(',');
                     }
                     out.push('\n');
+                }
+                push_indent(out, indent);
+                out.push(']');
+            }
+            Json::Object(pairs) if !pairs.is_empty() => {
+                out.push_str("{\n");
+                for (i, (k, v)) in pairs.iter().enumerate() {
+                    push_indent(out, indent + 1);
+                    write_json_string(out, k);
+                    out.push_str(": ");
+                    v.write_pretty(out, indent + 1);
+                    if i + 1 < pairs.len() {
+                        out.push(',');
