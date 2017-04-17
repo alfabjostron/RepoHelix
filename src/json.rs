@@ -128,3 +128,15 @@ fn format_float(f: f64) -> String {
     if !f.is_finite() {
         return "null".to_string();
     }
+    // Round to 6 decimal places for stable, readable metric output.
+    let rounded = (f * 1_000_000.0).round() / 1_000_000.0;
+    if rounded == rounded.trunc() && rounded.abs() < 1e15 {
+        format!("{:.1}", rounded)
+    } else {
+        let mut s = format!("{:.6}", rounded);
+        // Trim trailing zeros but keep at least one fractional digit.
+        while s.ends_with('0') {
+            s.pop();
+        }
+        if s.ends_with('.') {
+            s.push('0');
