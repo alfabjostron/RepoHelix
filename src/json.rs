@@ -140,3 +140,15 @@ fn format_float(f: f64) -> String {
         }
         if s.ends_with('.') {
             s.push('0');
+        }
+        s
+    }
+}
+
+/// Write a JSON string literal with proper escaping.
+fn write_json_string(out: &mut String, s: &str) {
+    out.push('"');
+    for ch in s.chars() {
+        match ch {
+            '"' => out.push_str("\\\""),
+            '\\' => out.push_str("\\\\"),
