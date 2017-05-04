@@ -164,3 +164,16 @@ fn write_json_string(out: &mut String, s: &str) {
         }
     }
     out.push('"');
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn escapes_control_and_quotes() {
+        let v = Json::str("line\nbreak\t\"q\"\\");
+        assert_eq!(v.to_compact(), r#""line\nbreak\t\"q\"\\""#);
+    }
+
+    #[test]
