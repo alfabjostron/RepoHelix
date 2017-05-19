@@ -16,3 +16,12 @@
 //!   across author identities, as a bus-factor / knowledge-distribution signal.
 //! - **Temporal clusters** — bursts of commits that approximate development
 //!   sessions or release pushes.
+//!
+//! # A note on interpretation
+//!
+//! These metrics describe *files and change activity*, not people. Ownership
+//! concentration is a risk signal about where knowledge is thin, not a measure
+//! of anyone's contribution or worth. See `docs/MODEL.md`.
+//!
+//! # Determinism
+//!
