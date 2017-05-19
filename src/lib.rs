@@ -8,3 +8,11 @@
 //!
 //! - **Churn** — how much each file changes (lines added + removed).
 //! - **Co-change / temporal coupling** — pairs of files that tend to change in
+//!   the same commit, scored with a Jaccard-style strength and a directional
+//!   confidence.
+//! - **Hotspots** — files that are simultaneously high-churn and
+//!   high-frequency, where maintenance effort concentrates.
+//! - **Ownership concentration** — how change activity for a file is spread
+//!   across author identities, as a bus-factor / knowledge-distribution signal.
+//! - **Temporal clusters** — bursts of commits that approximate development
+//!   sessions or release pushes.
