@@ -42,3 +42,12 @@ use std::path::Path;
 
 /// High-level error type for the pipeline.
 #[derive(Debug)]
+pub enum Error {
+    Git(git::GitError),
+    Io(std::io::Error),
+    NotARepo(String),
+    Usage(String),
+}
+
+impl std::fmt::Display for Error {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
