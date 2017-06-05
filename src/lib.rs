@@ -59,3 +59,12 @@ impl std::fmt::Display for Error {
         }
     }
 }
+
+impl std::error::Error for Error {}
+
+impl From<git::GitError> for Error {
+    fn from(e: git::GitError) -> Self {
+        Error::Git(e)
+    }
+}
+impl From<std::io::Error> for Error {
