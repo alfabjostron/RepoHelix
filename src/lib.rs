@@ -68,3 +68,11 @@ impl From<git::GitError> for Error {
     }
 }
 impl From<std::io::Error> for Error {
+    fn from(e: std::io::Error) -> Self {
+        Error::Io(e)
+    }
+}
+
+/// Load a [`model::History`] from a live repository.
+pub fn load_from_repo(repo: &Path, max_commits: Option<usize>) -> Result<model::History, Error> {
+    if !git::is_git_repo(repo) {
