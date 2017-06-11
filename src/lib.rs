@@ -76,3 +76,12 @@ impl From<std::io::Error> for Error {
 /// Load a [`model::History`] from a live repository.
 pub fn load_from_repo(repo: &Path, max_commits: Option<usize>) -> Result<model::History, Error> {
     if !git::is_git_repo(repo) {
+        return Err(Error::NotARepo(repo.display().to_string()));
+    }
+    let raw = git::run_log(repo, max_commits)?;
+    Ok(parse::parse_log(&raw))
+}
+
+/// Load a [`model::History`] from a captured fixture log file.
+pub fn load_from_log(path: &Path, max_commits: Option<usize>) -> Result<model::History, Error> {
+    let raw = fs::read_to_string(path)?;
