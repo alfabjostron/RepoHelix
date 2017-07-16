@@ -82,3 +82,27 @@ pub struct Ownership {
 /// or release pushes.
 #[derive(Debug, Clone, PartialEq)]
 pub struct TemporalCluster {
+    pub index: usize,
+    pub start: i64,
+    pub end: i64,
+    pub commits: u64,
+    /// Distinct files touched during the cluster.
+    pub files_touched: u64,
+    /// Total churn during the cluster.
+    pub churn: u64,
+}
+
+/// The complete analysis bundle.
+#[derive(Debug, Clone)]
+pub struct Analysis {
+    pub file_stats: Vec<FileStat>,
+    pub co_changes: Vec<CoChange>,
+    pub hotspots: Vec<Hotspot>,
+    pub ownership: Vec<Ownership>,
+    pub clusters: Vec<TemporalCluster>,
+    pub summary: Summary,
+}
+
+/// Repository-wide totals.
+#[derive(Debug, Clone, PartialEq)]
+pub struct Summary {
