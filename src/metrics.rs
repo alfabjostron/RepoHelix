@@ -106,3 +106,27 @@ pub struct Analysis {
 /// Repository-wide totals.
 #[derive(Debug, Clone, PartialEq)]
 pub struct Summary {
+    pub commits: u64,
+    pub files: u64,
+    pub authors: u64,
+    pub total_churn: u64,
+    pub first_commit: i64,
+    pub last_commit: i64,
+    /// Span in whole days between first and last commit.
+    pub span_days: i64,
+}
+
+/// Tunable parameters for the analysis.
+#[derive(Debug, Clone)]
+pub struct Params {
+    /// Minimum co-occurrence count for a co-change pair to be reported.
+    pub min_cochange: u64,
+    /// Maximum number of co-change pairs to report.
+    pub top_cochange: usize,
+    /// Maximum number of hotspots to report.
+    pub top_hotspots: usize,
+    /// Gap (in seconds) between commits that starts a new temporal cluster.
+    pub cluster_gap_secs: i64,
+    /// Ignore commits that touch more than this many files (likely bulk
+    /// imports or vendored drops) when computing co-change, to avoid spurious
+    /// coupling. Zero disables the filter.
