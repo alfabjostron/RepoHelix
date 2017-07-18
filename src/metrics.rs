@@ -202,3 +202,27 @@ fn compute_file_stats(history: &History) -> Vec<FileStat> {
         .map(|(path, a)| FileStat {
             path,
             commits: a.commits,
+            added: a.added,
+            removed: a.removed,
+            churn: a.churn,
+            authors: a.authors.len() as u64,
+            first_seen: a.first_seen,
+            last_seen: a.last_seen,
+        })
+        .collect();
+
+    // Sort by churn desc, then commits desc, then path for determinism.
+    stats.sort_by(|x, y| {
+        y.churn
+            .cmp(&x.churn)
+            .then(y.commits.cmp(&x.commits))
+            .then(x.path.cmp(&y.path))
+    });
+    stats
+}
+
+fn compute_cochange(history: &History, params: &Params) -> Vec<CoChange> {
+    // Count individual file appearances and unordered-pair co-appearances.
+    let mut file_count: HashMap<&str, u64> = HashMap::new();
+    let mut pair_count: HashMap<(&str, &str), u64> = HashMap::new();
+
