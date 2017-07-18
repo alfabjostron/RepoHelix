@@ -130,3 +130,27 @@ pub struct Params {
     /// Ignore commits that touch more than this many files (likely bulk
     /// imports or vendored drops) when computing co-change, to avoid spurious
     /// coupling. Zero disables the filter.
+    pub max_files_for_cochange: usize,
+}
+
+impl Default for Params {
+    fn default() -> Self {
+        Params {
+            min_cochange: 2,
+            top_cochange: 40,
+            top_hotspots: 20,
+            // Six hours: commits farther apart than this start a new session.
+            cluster_gap_secs: 6 * 3600,
+            max_files_for_cochange: 40,
+        }
+    }
+}
+
+/// Run the full analysis pipeline over a history.
+pub fn analyze(history: &History, params: &Params) -> Analysis {
+    let file_stats = compute_file_stats(history);
+    let co_changes = compute_cochange(history, params);
+    let hotspots = compute_hotspots(&file_stats, params);
+    let ownership = compute_ownership(history);
+    let clusters = compute_clusters(history, params);
+    let summary = compute_summary(history, &file_stats);
