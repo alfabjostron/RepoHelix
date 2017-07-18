@@ -178,3 +178,27 @@ fn compute_file_stats(history: &History) -> Vec<FileStat> {
 
     for c in &history.commits {
         for f in &c.files {
+            let acc = map.entry(f.path.clone()).or_insert_with(|| Acc {
+                commits: 0,
+                added: 0,
+                removed: 0,
+                churn: 0,
+                authors: BTreeSet::new(),
+                first_seen: c.timestamp,
+                last_seen: c.timestamp,
+            });
+            acc.commits += 1;
+            acc.added += f.added.unwrap_or(0);
+            acc.removed += f.removed.unwrap_or(0);
+            acc.churn += f.churn();
+            acc.authors.insert(c.identity().to_string());
+            acc.first_seen = acc.first_seen.min(c.timestamp);
+            acc.last_seen = acc.last_seen.max(c.timestamp);
+        }
+    }
+
+    let mut stats: Vec<FileStat> = map
+        .into_iter()
+        .map(|(path, a)| FileStat {
+            path,
+            commits: a.commits,
