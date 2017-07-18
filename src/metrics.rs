@@ -154,3 +154,27 @@ pub fn analyze(history: &History, params: &Params) -> Analysis {
     let ownership = compute_ownership(history);
     let clusters = compute_clusters(history, params);
     let summary = compute_summary(history, &file_stats);
+    Analysis {
+        file_stats,
+        co_changes,
+        hotspots,
+        ownership,
+        clusters,
+        summary,
+    }
+}
+
+fn compute_file_stats(history: &History) -> Vec<FileStat> {
+    struct Acc {
+        commits: u64,
+        added: u64,
+        removed: u64,
+        churn: u64,
+        authors: BTreeSet<String>,
+        first_seen: i64,
+        last_seen: i64,
+    }
+    let mut map: BTreeMap<String, Acc> = BTreeMap::new();
+
+    for c in &history.commits {
+        for f in &c.files {
