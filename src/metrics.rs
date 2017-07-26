@@ -226,3 +226,26 @@ fn compute_cochange(history: &History, params: &Params) -> Vec<CoChange> {
     let mut file_count: HashMap<&str, u64> = HashMap::new();
     let mut pair_count: HashMap<(&str, &str), u64> = HashMap::new();
 
+    for c in &history.commits {
+        // Distinct, sorted set of paths in this commit.
+        let mut paths: Vec<&str> = c.files.iter().map(|f| f.path.as_str()).collect();
+        paths.sort_unstable();
+        paths.dedup();
+
+        if paths.is_empty() {
+            continue;
+        }
+        if params.max_files_for_cochange > 0 && paths.len() > params.max_files_for_cochange {
+            // Still count singletons so confidence denominators stay correct.
+            for p in &paths {
+                *file_count.entry(*p).or_insert(0) += 1;
+            }
+            continue;
+        }
+
+        for p in &paths {
+            *file_count.entry(*p).or_insert(0) += 1;
+        }
+        for i in 0..paths.len() {
+            for j in (i + 1)..paths.len() {
+                // paths already sorted, so (i, j) is canonical ordering.
