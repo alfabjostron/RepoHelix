@@ -249,3 +249,27 @@ fn compute_cochange(history: &History, params: &Params) -> Vec<CoChange> {
         for i in 0..paths.len() {
             for j in (i + 1)..paths.len() {
                 // paths already sorted, so (i, j) is canonical ordering.
+                *pair_count.entry((paths[i], paths[j])).or_insert(0) += 1;
+            }
+        }
+    }
+
+    let mut pairs: Vec<CoChange> = pair_count
+        .into_iter()
+        .filter(|(_, together)| *together >= params.min_cochange)
+        .map(|((a, b), together)| {
+            let ca = *file_count.get(a).unwrap_or(&together);
+            let cb = *file_count.get(b).unwrap_or(&together);
+            let union = (ca + cb).saturating_sub(together);
+            let strength = if union == 0 {
+                0.0
+            } else {
+                together as f64 / union as f64
+            };
+            // Use the more frequently changed file as antecedent.
+            let antecedent = ca.max(cb);
+            let confidence = if antecedent == 0 {
+                0.0
+            } else {
+                together as f64 / antecedent as f64
+            };
