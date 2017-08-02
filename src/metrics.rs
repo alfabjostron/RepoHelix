@@ -273,3 +273,27 @@ fn compute_cochange(history: &History, params: &Params) -> Vec<CoChange> {
             } else {
                 together as f64 / antecedent as f64
             };
+            CoChange {
+                a: a.to_string(),
+                b: b.to_string(),
+                together,
+                count_a: ca,
+                count_b: cb,
+                strength,
+                confidence,
+            }
+        })
+        .collect();
+
+    pairs.sort_by(|x, y| {
+        y.strength
+            .partial_cmp(&x.strength)
+            .unwrap_or(std::cmp::Ordering::Equal)
+            .then(y.together.cmp(&x.together))
+            .then(x.a.cmp(&y.a))
+            .then(x.b.cmp(&y.b))
+    });
+    pairs.truncate(params.top_cochange);
+    pairs
+}
+
