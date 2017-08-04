@@ -321,3 +321,27 @@ fn compute_hotspots(file_stats: &[FileStat], params: &Params) -> Vec<Hotspot> {
                 churn: f.churn,
                 commits: f.commits,
                 score,
+            }
+        })
+        .collect();
+
+    spots.sort_by(|x, y| {
+        y.score
+            .partial_cmp(&x.score)
+            .unwrap_or(std::cmp::Ordering::Equal)
+            .then(y.churn.cmp(&x.churn))
+            .then(x.path.cmp(&y.path))
+    });
+    spots.truncate(params.top_hotspots);
+    spots
+}
+
+fn compute_ownership(history: &History) -> Vec<Ownership> {
+    // For each file: map identity -> commit count.
+    let mut per_file: BTreeMap<String, BTreeMap<String, u64>> = BTreeMap::new();
+    for c in &history.commits {
+        for f in &c.files {
+            *per_file
+                .entry(f.path.clone())
+                .or_default()
+                .entry(c.identity().to_string())
