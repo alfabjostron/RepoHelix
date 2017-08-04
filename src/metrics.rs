@@ -369,3 +369,27 @@ fn compute_ownership(history: &History) -> Vec<Ownership> {
             let total: u64 = counts.values().sum();
             let mut top_id = String::new();
             let mut top_n = 0u64;
+            let mut hhi = 0.0f64;
+            for (id, n) in &counts {
+                let share = *n as f64 / total as f64;
+                hhi += share * share;
+                if *n > top_n || (*n == top_n && id < &top_id) {
+                    if *n > top_n {
+                        top_n = *n;
+                        top_id = id.clone();
+                    } else if top_id.is_empty() {
+                        top_id = id.clone();
+                    }
+                }
+            }
+            let authors = counts.len() as u64;
+            // Normalize HHI so a single author -> 1.0 and even split -> ~0.
+            let concentration = if authors <= 1 {
+                1.0
+            } else {
+                let n = authors as f64;
+                (hhi - 1.0 / n) / (1.0 - 1.0 / n)
+            };
+            let top_share = if total == 0 {
+                0.0
+            } else {
