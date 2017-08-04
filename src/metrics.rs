@@ -345,3 +345,27 @@ fn compute_ownership(history: &History) -> Vec<Ownership> {
                 .entry(f.path.clone())
                 .or_default()
                 .entry(c.identity().to_string())
+                .or_insert(0) += 1;
+        }
+    }
+
+    // Stable anonymized labels: rank global identities by total activity.
+    let mut global: BTreeMap<String, u64> = BTreeMap::new();
+    for counts in per_file.values() {
+        for (id, n) in counts {
+            *global.entry(id.clone()).or_insert(0) += *n;
+        }
+    }
+    let mut ranked: Vec<(String, u64)> = global.into_iter().collect();
+    ranked.sort_by(|a, b| b.1.cmp(&a.1).then(a.0.cmp(&b.0)));
+    let mut label_of: HashMap<String, String> = HashMap::new();
+    for (i, (id, _)) in ranked.iter().enumerate() {
+        label_of.insert(id.clone(), format!("author#{}", i + 1));
+    }
+
+    let mut out: Vec<Ownership> = per_file
+        .into_iter()
+        .map(|(path, counts)| {
+            let total: u64 = counts.values().sum();
+            let mut top_id = String::new();
+            let mut top_n = 0u64;
