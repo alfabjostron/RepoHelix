@@ -488,3 +488,27 @@ fn compute_summary(history: &History, file_stats: &[FileStat]) -> Summary {
     Summary {
         commits: history.commit_count() as u64,
         files: file_stats.len() as u64,
+        authors: authors.len() as u64,
+        total_churn,
+        first_commit: first,
+        last_commit: last,
+        span_days,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::model::{Commit, FileChange};
+
+    fn commit(hash: &str, email: &str, ts: i64, files: &[(&str, u64, u64)]) -> Commit {
+        Commit {
+            hash: hash.into(),
+            author_name: email.into(),
+            author_email: email.into(),
+            timestamp: ts,
+            subject: "s".into(),
+            files: files
+                .iter()
+                .map(|(p, a, r)| FileChange {
+                    path: (*p).into(),
