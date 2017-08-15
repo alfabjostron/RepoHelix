@@ -416,3 +416,27 @@ fn compute_ownership(history: &History) -> Vec<Ownership> {
             .unwrap_or(std::cmp::Ordering::Equal)
             .then(x.path.cmp(&y.path))
     });
+    out
+}
+
+fn compute_clusters(history: &History, params: &Params) -> Vec<TemporalCluster> {
+    if history.is_empty() {
+        return Vec::new();
+    }
+    // Sort commits ascending by time (history is newest-first from git).
+    let mut commits: Vec<&Commit> = history.commits.iter().collect();
+    commits.sort_by_key(|c| c.timestamp);
+
+    let mut clusters = Vec::new();
+    let mut cur_start = commits[0].timestamp;
+    let mut cur_end = commits[0].timestamp;
+    let mut cur_commits: Vec<&Commit> = vec![commits[0]];
+    let mut prev = commits[0].timestamp;
+
+    let flush = |start: i64, end: i64, group: &[&Commit], index: usize| {
+        let mut files = BTreeSet::new();
+        let mut churn = 0u64;
+        for c in group {
+            for f in &c.files {
+                files.insert(f.path.as_str());
+                churn += f.churn();
