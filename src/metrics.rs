@@ -464,3 +464,27 @@ fn compute_clusters(history: &History, params: &Params) -> Vec<TemporalCluster> 
     }
     clusters.push(flush(cur_start, cur_end, &cur_commits, clusters.len()));
     clusters
+}
+
+fn compute_summary(history: &History, file_stats: &[FileStat]) -> Summary {
+    let mut authors = BTreeSet::new();
+    let mut first = i64::MAX;
+    let mut last = i64::MIN;
+    for c in &history.commits {
+        authors.insert(c.identity().to_string());
+        first = first.min(c.timestamp);
+        last = last.max(c.timestamp);
+    }
+    if history.is_empty() {
+        first = 0;
+        last = 0;
+    }
+    let total_churn: u64 = file_stats.iter().map(|f| f.churn).sum();
+    let span_days = if last > first {
+        (last - first) / 86_400
+    } else {
+        0
+    };
+    Summary {
+        commits: history.commit_count() as u64,
+        files: file_stats.len() as u64,
