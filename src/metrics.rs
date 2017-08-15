@@ -393,3 +393,26 @@ fn compute_ownership(history: &History) -> Vec<Ownership> {
             let top_share = if total == 0 {
                 0.0
             } else {
+                top_n as f64 / total as f64
+            };
+            let label = label_of
+                .get(&top_id)
+                .cloned()
+                .unwrap_or_else(|| "author#?".to_string());
+            Ownership {
+                path,
+                authors,
+                top_share,
+                concentration,
+                top_identity_label: label,
+            }
+        })
+        .collect();
+
+    // Highest concentration (most single-owner risk) first.
+    out.sort_by(|x, y| {
+        y.concentration
+            .partial_cmp(&x.concentration)
+            .unwrap_or(std::cmp::Ordering::Equal)
+            .then(x.path.cmp(&y.path))
+    });
