@@ -440,3 +440,27 @@ fn compute_clusters(history: &History, params: &Params) -> Vec<TemporalCluster> 
             for f in &c.files {
                 files.insert(f.path.as_str());
                 churn += f.churn();
+            }
+        }
+        TemporalCluster {
+            index,
+            start,
+            end,
+            commits: group.len() as u64,
+            files_touched: files.len() as u64,
+            churn,
+        }
+    };
+
+    for c in commits.iter().skip(1) {
+        if c.timestamp - prev > params.cluster_gap_secs {
+            clusters.push(flush(cur_start, cur_end, &cur_commits, clusters.len()));
+            cur_start = c.timestamp;
+            cur_commits.clear();
+        }
+        cur_commits.push(c);
+        cur_end = c.timestamp;
+        prev = c.timestamp;
+    }
+    clusters.push(flush(cur_start, cur_end, &cur_commits, clusters.len()));
+    clusters
