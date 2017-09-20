@@ -512,3 +512,27 @@ mod tests {
                 .iter()
                 .map(|(p, a, r)| FileChange {
                     path: (*p).into(),
+                    added: Some(*a),
+                    removed: Some(*r),
+                })
+                .collect(),
+        }
+    }
+
+    fn sample() -> History {
+        History::new(vec![
+            commit("c4", "ada@x", 4000, &[("a.rs", 5, 1), ("b.rs", 2, 0)]),
+            commit("c3", "ada@x", 3500, &[("a.rs", 3, 3), ("b.rs", 1, 1)]),
+            commit("c2", "bob@x", 3000, &[("a.rs", 4, 0), ("c.rs", 9, 0)]),
+            commit("c1", "ada@x", 100, &[("a.rs", 10, 0)]),
+        ])
+    }
+
+    #[test]
+    fn file_stats_rank_by_churn() {
+        let a = analyze(&sample(), &Params::default());
+        assert_eq!(a.file_stats[0].path, "a.rs");
+        let a_stat = a.file_stats.iter().find(|f| f.path == "a.rs").unwrap();
+        assert_eq!(a_stat.commits, 4);
+        assert_eq!(a_stat.added, 22);
+        assert_eq!(a_stat.removed, 4);
