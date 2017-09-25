@@ -41,3 +41,18 @@ fn build_json(a: &Analysis) -> Json {
                 ])
             })
             .collect(),
+    );
+
+    let cochanges = Json::Array(
+        a.co_changes
+            .iter()
+            .map(|c| {
+                Json::obj(vec![
+                    ("a", Json::str(&c.a)),
+                    ("b", Json::str(&c.b)),
+                    ("together", Json::Int(c.together as i64)),
+                    ("count_a", Json::Int(c.count_a as i64)),
+                    ("count_b", Json::Int(c.count_b as i64)),
+                    ("strength", Json::Float(c.strength)),
+                    ("confidence", Json::Float(c.confidence)),
+                ])
