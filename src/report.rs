@@ -56,3 +56,18 @@ fn build_json(a: &Analysis) -> Json {
                     ("strength", Json::Float(c.strength)),
                     ("confidence", Json::Float(c.confidence)),
                 ])
+            })
+            .collect(),
+    );
+
+    let hotspots = Json::Array(
+        a.hotspots
+            .iter()
+            .map(|h| {
+                Json::obj(vec![
+                    ("path", Json::str(&h.path)),
+                    ("churn", Json::Int(h.churn as i64)),
+                    ("commits", Json::Int(h.commits as i64)),
+                    ("score", Json::Float(h.score)),
+                ])
+            })
