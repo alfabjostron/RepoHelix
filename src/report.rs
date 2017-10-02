@@ -100,3 +100,18 @@ fn build_json(a: &Analysis) -> Json {
                     ("commits", Json::Int(c.commits as i64)),
                     ("files_touched", Json::Int(c.files_touched as i64)),
                     ("churn", Json::Int(c.churn as i64)),
+                ])
+            })
+            .collect(),
+    );
+
+    Json::obj(vec![
+        ("schema", Json::str("repohelix/analysis/v1")),
+        (
+            "disclaimer",
+            Json::str(
+                "Metrics describe file and change activity only. They are not \
+                 measures of individual productivity or personnel judgments.",
+            ),
+        ),
+        ("summary", summary),
