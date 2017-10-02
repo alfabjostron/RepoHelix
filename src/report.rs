@@ -115,3 +115,18 @@ fn build_json(a: &Analysis) -> Json {
             ),
         ),
         ("summary", summary),
+        ("files", files),
+        ("cochanges", cochanges),
+        ("hotspots", hotspots),
+        ("ownership", ownership),
+        ("clusters", clusters),
+    ])
+}
+
+/// Render a compact, human-readable text report.
+pub fn to_text(analysis: &Analysis) -> String {
+    let mut out = String::new();
+    let s = &analysis.summary;
+
+    let _ = writeln!(out, "repohelix — Git history analysis");
+    let _ = writeln!(out, "================================");
