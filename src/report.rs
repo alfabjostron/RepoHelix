@@ -86,3 +86,17 @@ fn build_json(a: &Analysis) -> Json {
                     ("top_identity_label", Json::str(&o.top_identity_label)),
                 ])
             })
+            .collect(),
+    );
+
+    let clusters = Json::Array(
+        a.clusters
+            .iter()
+            .map(|c| {
+                Json::obj(vec![
+                    ("index", Json::Int(c.index as i64)),
+                    ("start", Json::Int(c.start)),
+                    ("end", Json::Int(c.end)),
+                    ("commits", Json::Int(c.commits as i64)),
+                    ("files_touched", Json::Int(c.files_touched as i64)),
+                    ("churn", Json::Int(c.churn as i64)),
