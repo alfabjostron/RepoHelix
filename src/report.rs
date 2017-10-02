@@ -130,3 +130,18 @@ pub fn to_text(analysis: &Analysis) -> String {
 
     let _ = writeln!(out, "repohelix — Git history analysis");
     let _ = writeln!(out, "================================");
+    let _ = writeln!(out);
+    let _ = writeln!(out, "Summary");
+    let _ = writeln!(out, "  commits ......... {}", s.commits);
+    let _ = writeln!(out, "  files ........... {}", s.files);
+    let _ = writeln!(out, "  authors ......... {}", s.authors);
+    let _ = writeln!(out, "  total churn ..... {}", s.total_churn);
+    let _ = writeln!(out, "  span (days) ..... {}", s.span_days);
+    let _ = writeln!(out);
+
+    let _ = writeln!(out, "Top hotspots (churn x frequency)");
+    let _ = writeln!(
+        out,
+        "  {:<40} {:>7} {:>7} {:>7}",
+        "path", "churn", "commits", "score"
+    );
