@@ -145,3 +145,18 @@ pub fn to_text(analysis: &Analysis) -> String {
         "  {:<40} {:>7} {:>7} {:>7}",
         "path", "churn", "commits", "score"
     );
+    for h in analysis.hotspots.iter().take(15) {
+        let _ = writeln!(
+            out,
+            "  {:<40} {:>7} {:>7} {:>7.3}",
+            truncate(&h.path, 40),
+            h.churn,
+            h.commits,
+            h.score
+        );
+    }
+    let _ = writeln!(out);
+
+    let _ = writeln!(out, "Strongest temporal coupling (co-change)");
+    let _ = writeln!(
+        out,
