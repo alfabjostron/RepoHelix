@@ -204,3 +204,18 @@ pub fn to_text(analysis: &Analysis) -> String {
             out,
             "  {:>5} {:>8} {:>7} {:>7}",
             c.index, c.commits, c.files_touched, c.churn
+        );
+    }
+    let _ = writeln!(out);
+    let _ = writeln!(
+        out,
+        "Note: these metrics describe code and change activity, not people."
+    );
+
+    out
+}
+
+fn truncate(s: &str, max: usize) -> String {
+    if s.chars().count() <= max {
+        s.to_string()
+    } else {
