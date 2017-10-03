@@ -189,3 +189,18 @@ pub fn to_text(analysis: &Analysis) -> String {
             o.authors,
             o.top_share * 100.0,
             o.concentration
+        );
+    }
+    let _ = writeln!(out);
+
+    let _ = writeln!(out, "Temporal clusters (development sessions)");
+    let _ = writeln!(
+        out,
+        "  {:>5} {:>8} {:>7} {:>7}",
+        "idx", "commits", "files", "churn"
+    );
+    for c in analysis.clusters.iter().take(15) {
+        let _ = writeln!(
+            out,
+            "  {:>5} {:>8} {:>7} {:>7}",
+            c.index, c.commits, c.files_touched, c.churn
