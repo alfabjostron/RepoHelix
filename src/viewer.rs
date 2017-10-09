@@ -25,3 +25,14 @@ pub fn build(analysis: &Analysis, max_nodes: usize) -> Json {
     for (i, p) in selected.iter().enumerate() {
         index_of.insert(*p, i);
     }
+
+    let nodes = Json::Array(
+        analysis
+            .file_stats
+            .iter()
+            .take(max_nodes)
+            .map(|f| {
+                let own = analysis
+                    .ownership
+                    .iter()
+                    .find(|o| o.path == f.path)
