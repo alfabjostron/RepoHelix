@@ -58,3 +58,14 @@ pub fn build(analysis: &Analysis, max_nodes: usize) -> Json {
             .iter()
             .filter_map(|c| {
                 let a = *index_of.get(c.a.as_str())?;
+                let b = *index_of.get(c.b.as_str())?;
+                Some(Json::obj(vec![
+                    ("source", Json::Int(a as i64)),
+                    ("target", Json::Int(b as i64)),
+                    ("strength", Json::Float(c.strength)),
+                    ("together", Json::Int(c.together as i64)),
+                ]))
+            })
+            .collect(),
+    );
+
