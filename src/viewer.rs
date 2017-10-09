@@ -36,3 +36,14 @@ pub fn build(analysis: &Analysis, max_nodes: usize) -> Json {
                     .ownership
                     .iter()
                     .find(|o| o.path == f.path)
+                    .map(|o| o.concentration)
+                    .unwrap_or(0.0);
+                Json::obj(vec![
+                    ("path", Json::str(&f.path)),
+                    ("churn", Json::Int(f.churn as i64)),
+                    ("commits", Json::Int(f.commits as i64)),
+                    ("authors", Json::Int(f.authors as i64)),
+                    ("concentration", Json::Float(own)),
+                    ("first_seen", Json::Int(f.first_seen)),
+                    ("last_seen", Json::Int(f.last_seen)),
+                ])
