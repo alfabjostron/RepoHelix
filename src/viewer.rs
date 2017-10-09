@@ -14,3 +14,14 @@ use std::collections::BTreeMap;
 pub fn build(analysis: &Analysis, max_nodes: usize) -> Json {
     // Rank files by churn (file_stats is already churn-sorted).
     let selected: Vec<&str> = analysis
+        .file_stats
+        .iter()
+        .take(max_nodes)
+        .map(|f| f.path.as_str())
+        .collect();
+
+    // Assign stable indices to selected files.
+    let mut index_of: BTreeMap<&str, usize> = BTreeMap::new();
+    for (i, p) in selected.iter().enumerate() {
+        index_of.insert(*p, i);
+    }
