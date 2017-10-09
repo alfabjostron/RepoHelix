@@ -47,3 +47,14 @@ pub fn build(analysis: &Analysis, max_nodes: usize) -> Json {
                     ("first_seen", Json::Int(f.first_seen)),
                     ("last_seen", Json::Int(f.last_seen)),
                 ])
+            })
+            .collect(),
+    );
+
+    // Only keep links where both endpoints are among the selected nodes.
+    let links = Json::Array(
+        analysis
+            .co_changes
+            .iter()
+            .filter_map(|c| {
+                let a = *index_of.get(c.a.as_str())?;
