@@ -91,3 +91,14 @@ pub fn build(analysis: &Analysis, max_nodes: usize) -> Json {
         ("span_days", Json::Int(analysis.summary.span_days)),
         ("nodes", nodes),
         ("links", links),
+        ("clusters", clusters),
+    ])
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::metrics::{analyze, Params};
+    use crate::model::{Commit, FileChange, History};
+
+    fn hist() -> History {
