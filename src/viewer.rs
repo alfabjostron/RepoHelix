@@ -124,3 +124,14 @@ mod tests {
         ])
     }
 
+    #[test]
+    fn payload_has_nodes_and_links() {
+        let a = analyze(&hist(), &Params::default());
+        let payload = build(&a, 50);
+        let s = payload.to_compact();
+        assert!(s.contains("repohelix/viewer/v1"));
+        assert!(s.contains("\"nodes\""));
+        assert!(s.contains("\"links\""));
+        assert!(s.contains("a.rs"));
+    }
+
