@@ -31,3 +31,19 @@ pub enum Source {
 pub struct AnalyzeOpts {
     pub source: Source,
     pub format: Format,
+    pub pretty: bool,
+    pub max_commits: Option<usize>,
+    pub out: Option<PathBuf>,
+    pub params: Params,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct ViewerOpts {
+    pub source: Source,
+    pub out: Option<PathBuf>,
+    pub max_commits: Option<usize>,
+    pub params: Params,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Format {
