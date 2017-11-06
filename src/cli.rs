@@ -79,3 +79,19 @@ pub fn parse(args: &[String]) -> Result<Command, String> {
         "viewer-data" => parse_viewer(args[1..].to_vec()),
         other => Err(format!("unknown command '{other}'. Try 'repohelix help'.")),
     }
+}
+
+struct Cursor {
+    args: Vec<String>,
+    idx: usize,
+}
+
+impl Cursor {
+    fn new(args: Vec<String>) -> Self {
+        Cursor { args, idx: 0 }
+    }
+    fn next(&mut self) -> Option<String> {
+        let v = self.args.get(self.idx).cloned();
+        if v.is_some() {
+            self.idx += 1;
+        }
