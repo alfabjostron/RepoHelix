@@ -95,3 +95,19 @@ impl Cursor {
         if v.is_some() {
             self.idx += 1;
         }
+        v
+    }
+    fn value(&mut self, flag: &str) -> Result<String, String> {
+        self.next()
+            .ok_or_else(|| format!("flag '{flag}' requires a value"))
+    }
+}
+
+fn parse_source(repo: Option<PathBuf>, log: Option<PathBuf>) -> Result<Source, String> {
+    match (repo, log) {
+        (Some(_), Some(_)) => Err("choose only one of --repo or --log".to_string()),
+        (Some(r), None) => Ok(Source::Repo(r)),
+        (None, Some(l)) => Ok(Source::Log(l)),
+        // Default: analyze the current directory as a repository.
+        (None, None) => Ok(Source::Repo(PathBuf::from("."))),
+    }
