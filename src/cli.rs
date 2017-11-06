@@ -128,3 +128,19 @@ fn parse_analyze(args: Vec<String>) -> Result<Command, String> {
             "--repo" => repo = Some(PathBuf::from(c.value("--repo")?)),
             "--log" => log = Some(PathBuf::from(c.value("--log")?)),
             "--format" => {
+                format = match c.value("--format")?.as_str() {
+                    "json" => Format::Json,
+                    "text" => Format::Text,
+                    other => return Err(format!("invalid --format '{other}' (json|text)")),
+                }
+            }
+            "--compact" => pretty = false,
+            "--pretty" => pretty = true,
+            "--max-commits" => {
+                max_commits = Some(parse_usize(&c.value("--max-commits")?, "--max-commits")?)
+            }
+            "--out" => out = Some(PathBuf::from(c.value("--out")?)),
+            "--min-cochange" => {
+                params.min_cochange = parse_u64(&c.value("--min-cochange")?, "--min-cochange")?
+            }
+            "--top-cochange" => {
