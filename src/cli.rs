@@ -111,3 +111,20 @@ fn parse_source(repo: Option<PathBuf>, log: Option<PathBuf>) -> Result<Source, S
         // Default: analyze the current directory as a repository.
         (None, None) => Ok(Source::Repo(PathBuf::from("."))),
     }
+}
+
+fn parse_analyze(args: Vec<String>) -> Result<Command, String> {
+    let mut c = Cursor::new(args);
+    let mut repo = None;
+    let mut log = None;
+    let mut format = Format::Text;
+    let mut pretty = true;
+    let mut max_commits = None;
+    let mut out = None;
+    let mut params = Params::default();
+
+    while let Some(a) = c.next() {
+        match a.as_str() {
+            "--repo" => repo = Some(PathBuf::from(c.value("--repo")?)),
+            "--log" => log = Some(PathBuf::from(c.value("--log")?)),
+            "--format" => {
