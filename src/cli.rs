@@ -160,3 +160,19 @@ fn parse_analyze(args: Vec<String>) -> Result<Command, String> {
         }
     }
 
+    let source = parse_source(repo, log)?;
+    Ok(Command::Analyze(AnalyzeOpts {
+        source,
+        format,
+        pretty,
+        max_commits,
+        out,
+        params,
+    }))
+}
+
+fn parse_viewer(args: Vec<String>) -> Result<Command, String> {
+    let mut c = Cursor::new(args);
+    let mut repo = None;
+    let mut log = None;
+    let mut out = None;
