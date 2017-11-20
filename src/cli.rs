@@ -144,3 +144,19 @@ fn parse_analyze(args: Vec<String>) -> Result<Command, String> {
                 params.min_cochange = parse_u64(&c.value("--min-cochange")?, "--min-cochange")?
             }
             "--top-cochange" => {
+                params.top_cochange = parse_usize(&c.value("--top-cochange")?, "--top-cochange")?
+            }
+            "--top-hotspots" => {
+                params.top_hotspots = parse_usize(&c.value("--top-hotspots")?, "--top-hotspots")?
+            }
+            "--cluster-gap" => {
+                params.cluster_gap_secs = parse_i64(&c.value("--cluster-gap")?, "--cluster-gap")?
+            }
+            "--max-files-cochange" => {
+                params.max_files_for_cochange =
+                    parse_usize(&c.value("--max-files-cochange")?, "--max-files-cochange")?
+            }
+            other => return Err(format!("unknown flag '{other}' for analyze")),
+        }
+    }
+
