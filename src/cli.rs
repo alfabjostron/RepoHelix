@@ -176,3 +176,19 @@ fn parse_viewer(args: Vec<String>) -> Result<Command, String> {
     let mut repo = None;
     let mut log = None;
     let mut out = None;
+    let mut max_commits = None;
+    let mut params = Params::default();
+
+    while let Some(a) = c.next() {
+        match a.as_str() {
+            "--repo" => repo = Some(PathBuf::from(c.value("--repo")?)),
+            "--log" => log = Some(PathBuf::from(c.value("--log")?)),
+            "--out" => out = Some(PathBuf::from(c.value("--out")?)),
+            "--max-commits" => {
+                max_commits = Some(parse_usize(&c.value("--max-commits")?, "--max-commits")?)
+            }
+            "--top-cochange" => {
+                params.top_cochange = parse_usize(&c.value("--top-cochange")?, "--top-cochange")?
+            }
+            "--min-cochange" => {
+                params.min_cochange = parse_u64(&c.value("--min-cochange")?, "--min-cochange")?
