@@ -208,3 +208,19 @@ fn parse_viewer(args: Vec<String>) -> Result<Command, String> {
 
 fn parse_usize(s: &str, flag: &str) -> Result<usize, String> {
     s.parse::<usize>()
+        .map_err(|_| format!("flag '{flag}' expects a non-negative integer, got '{s}'"))
+}
+
+fn parse_u64(s: &str, flag: &str) -> Result<u64, String> {
+    s.parse::<u64>()
+        .map_err(|_| format!("flag '{flag}' expects a non-negative integer, got '{s}'"))
+}
+
+fn parse_i64(s: &str, flag: &str) -> Result<i64, String> {
+    s.parse::<i64>()
+        .map_err(|_| format!("flag '{flag}' expects an integer, got '{s}'"))
+}
+
+/// The help text shown for `repohelix help`.
+pub fn help_text() -> &'static str {
+    "repohelix — Git history architecture & temporal-coupling explorer\n\
