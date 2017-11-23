@@ -192,3 +192,19 @@ fn parse_viewer(args: Vec<String>) -> Result<Command, String> {
             }
             "--min-cochange" => {
                 params.min_cochange = parse_u64(&c.value("--min-cochange")?, "--min-cochange")?
+            }
+            other => return Err(format!("unknown flag '{other}' for viewer-data")),
+        }
+    }
+
+    let source = parse_source(repo, log)?;
+    Ok(Command::ViewerData(ViewerOpts {
+        source,
+        out,
+        max_commits,
+        params,
+    }))
+}
+
+fn parse_usize(s: &str, flag: &str) -> Result<usize, String> {
+    s.parse::<usize>()
