@@ -224,3 +224,19 @@ fn parse_i64(s: &str, flag: &str) -> Result<i64, String> {
 /// The help text shown for `repohelix help`.
 pub fn help_text() -> &'static str {
     "repohelix — Git history architecture & temporal-coupling explorer\n\
+     \n\
+     USAGE:\n\
+     \x20 repohelix <command> [options]\n\
+     \n\
+     COMMANDS:\n\
+     \x20 analyze        Analyze history and print a JSON or text report\n\
+     \x20 viewer-data    Emit compact JSON for the TypeScript helix viewer\n\
+     \x20 help           Show this help\n\
+     \x20 version        Show version\n\
+     \n\
+     SOURCE (pick one; defaults to --repo .):\n\
+     \x20 --repo <dir>            Analyze a live Git repository\n\
+     \x20 --log <file>           Import a captured/fixture git log file\n\
+     \n\
+     ANALYZE OPTIONS:\n\
+     \x20 --format <json|text>    Output format (default: text)\n\
