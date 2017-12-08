@@ -240,3 +240,19 @@ pub fn help_text() -> &'static str {
      \n\
      ANALYZE OPTIONS:\n\
      \x20 --format <json|text>    Output format (default: text)\n\
+     \x20 --compact               Compact JSON (default: pretty)\n\
+     \x20 --max-commits <n>       Limit history depth\n\
+     \x20 --out <file>            Write to file instead of stdout\n\
+     \x20 --min-cochange <n>      Minimum co-change count (default: 2)\n\
+     \x20 --top-cochange <n>      Max co-change pairs (default: 40)\n\
+     \x20 --top-hotspots <n>      Max hotspots (default: 20)\n\
+     \x20 --cluster-gap <secs>    Session gap threshold (default: 21600)\n\
+     \x20 --max-files-cochange <n> Skip huge commits for coupling (default: 40)\n\
+     \n\
+     Metrics describe code and change activity only. They are not measures of\n\
+     individual productivity and must not be used as personnel judgments.\n"
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
