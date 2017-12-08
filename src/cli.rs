@@ -273,3 +273,19 @@ mod tests {
             Command::Analyze(o) => {
                 assert_eq!(o.source, Source::Log(PathBuf::from("fixture.log")));
                 assert_eq!(o.format, Format::Json);
+                assert!(o.pretty);
+            }
+            _ => panic!("expected analyze"),
+        }
+    }
+
+    #[test]
+    fn compact_flag_disables_pretty() {
+        let cmd = parse(&s(&["analyze", "--compact"])).unwrap();
+        match cmd {
+            Command::Analyze(o) => assert!(!o.pretty),
+            _ => panic!(),
+        }
+    }
+
+    #[test]
