@@ -256,3 +256,20 @@ pub fn help_text() -> &'static str {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn s(v: &[&str]) -> Vec<String> {
+        v.iter().map(|x| x.to_string()).collect()
+    }
+
+    #[test]
+    fn defaults_to_help_when_empty() {
+        assert_eq!(parse(&[]).unwrap(), Command::Help);
+    }
+
+    #[test]
+    fn parses_analyze_with_log() {
+        let cmd = parse(&s(&["analyze", "--log", "fixture.log", "--format", "json"])).unwrap();
+        match cmd {
+            Command::Analyze(o) => {
+                assert_eq!(o.source, Source::Log(PathBuf::from("fixture.log")));
+                assert_eq!(o.format, Format::Json);
