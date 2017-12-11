@@ -15,3 +15,12 @@ fn main() -> ExitCode {
         Err(msg) => {
             let _ = writeln!(std::io::stderr(), "repohelix: {msg}");
             ExitCode::FAILURE
+        }
+    }
+}
+
+fn run(args: &[String]) -> Result<(), String> {
+    let command = cli::parse(args)?;
+    match command {
+        Command::Help => {
+            print!("{}", cli::help_text());
