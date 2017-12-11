@@ -33,3 +33,12 @@ fn run(args: &[String]) -> Result<(), String> {
         Command::Analyze(opts) => {
             let history =
                 load_history(&opts.source, opts.max_commits).map_err(|e| e.to_string())?;
+            let analysis = analyze(&history, &opts.params);
+            let rendered = match opts.format {
+                Format::Json => report::to_json(&analysis, opts.pretty),
+                Format::Text => report::to_text(&analysis),
+            };
+            emit(opts.out.as_deref(), &rendered).map_err(|e| e.to_string())
+        }
+        Command::ViewerData(opts) => {
+            let history =
