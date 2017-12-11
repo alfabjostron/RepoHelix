@@ -24,3 +24,12 @@ fn run(args: &[String]) -> Result<(), String> {
     match command {
         Command::Help => {
             print!("{}", cli::help_text());
+            Ok(())
+        }
+        Command::Version => {
+            println!("repohelix {}", env!("CARGO_PKG_VERSION"));
+            Ok(())
+        }
+        Command::Analyze(opts) => {
+            let history =
+                load_history(&opts.source, opts.max_commits).map_err(|e| e.to_string())?;
