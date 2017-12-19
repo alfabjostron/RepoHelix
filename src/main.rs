@@ -42,3 +42,12 @@ fn run(args: &[String]) -> Result<(), String> {
         }
         Command::ViewerData(opts) => {
             let history =
+                load_history(&opts.source, opts.max_commits).map_err(|e| e.to_string())?;
+            let analysis = analyze(&history, &opts.params);
+            // 64 nodes keeps the payload compact and the helix legible.
+            let payload = viewer::build(&analysis, 64);
+            emit(opts.out.as_deref(), &payload.to_compact()).map_err(|e| e.to_string())
+        }
+    }
+}
+
