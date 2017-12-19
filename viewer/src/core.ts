@@ -11,3 +11,15 @@ export interface ViewerNode {
   path: string;
   churn: number;
   commits: number;
+  authors: number;
+  concentration: number;
+  first_seen: number;
+  last_seen: number;
+}
+
+/** A co-change link referencing node indices. */
+export interface ViewerLink {
+  source: number;
+  target: number;
+  strength: number;
+  together: number;
