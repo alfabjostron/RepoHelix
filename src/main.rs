@@ -51,3 +51,12 @@ fn run(args: &[String]) -> Result<(), String> {
     }
 }
 
+fn load_history(
+    source: &Source,
+    max_commits: Option<usize>,
+) -> Result<repohelix::model::History, Error> {
+    match source {
+        Source::Repo(p) => load_from_repo(p, max_commits),
+        Source::Log(p) => load_from_log(p, max_commits),
+    }
+}
