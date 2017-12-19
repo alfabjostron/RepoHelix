@@ -60,3 +60,12 @@ fn load_history(
         Source::Log(p) => load_from_log(p, max_commits),
     }
 }
+
+/// Write output either to a file or to stdout.
+fn emit(out: Option<&Path>, content: &str) -> std::io::Result<()> {
+    match out {
+        Some(path) => {
+            if let Some(parent) = path.parent() {
+                if !parent.as_os_str().is_empty() {
+                    std::fs::create_dir_all(parent)?;
+                }
