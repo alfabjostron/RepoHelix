@@ -35,3 +35,16 @@ export interface ViewerCluster {
 }
 
 /** The full payload. */
+export interface ViewerData {
+  schema: string;
+  commits: number;
+  span_days: number;
+  nodes: ViewerNode[];
+  links: ViewerLink[];
+  clusters: ViewerCluster[];
+}
+
+/** Linear interpolation. */
+export function lerp(a: number, b: number, t: number): number {
+  return a + (b - a) * t;
+}
