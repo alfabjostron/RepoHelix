@@ -96,3 +96,16 @@ export function helixOrder(nodes: ViewerNode[]): number[] {
 
 /** Position on a ring of `n` slots at slot `i`, centred at (cx, cy). */
 export function ringPoint(
+  i: number,
+  n: number,
+  cx: number,
+  cy: number,
+  radius: number,
+): { x: number; y: number; angle: number } {
+  const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
+  return { x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius, angle };
+}
+
+/** Validate that every link references an in-range node index. */
+export function linksAreValid(data: ViewerData): boolean {
+  const n = data.nodes.length;
