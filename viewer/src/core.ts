@@ -72,3 +72,15 @@ export function concentrationColour(c: number): string {
 export function churnRadius(churn: number, maxChurn: number): number {
   if (maxChurn <= 0) return 3;
   const t = Math.sqrt(churn / maxChurn);
+  return lerp(3, 18, t);
+}
+
+/** Basename of a path. */
+export function basename(path: string): string {
+  const i = path.lastIndexOf("/");
+  return i >= 0 ? path.slice(i + 1) : path;
+}
+
+/** Maximum churn across nodes (0 if empty). */
+export function maxChurn(nodes: ViewerNode[]): number {
+  return nodes.reduce((m, n) => Math.max(m, n.churn), 0);
