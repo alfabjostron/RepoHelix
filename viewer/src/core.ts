@@ -23,3 +23,15 @@ export interface ViewerLink {
   target: number;
   strength: number;
   together: number;
+}
+
+/** A temporal cluster (development session). */
+export interface ViewerCluster {
+  index: number;
+  start: number;
+  end: number;
+  commits: number;
+  churn: number;
+}
+
+/** The full payload. */
