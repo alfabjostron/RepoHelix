@@ -84,3 +84,15 @@ export function basename(path: string): string {
 /** Maximum churn across nodes (0 if empty). */
 export function maxChurn(nodes: ViewerNode[]): number {
   return nodes.reduce((m, n) => Math.max(m, n.churn), 0);
+}
+
+/** Stable helix ordering: by first appearance, then path. */
+export function helixOrder(nodes: ViewerNode[]): number[] {
+  return nodes
+    .map((n, i) => ({ n, i }))
+    .sort((a, b) => a.n.first_seen - b.n.first_seen || a.n.path.localeCompare(b.n.path))
+    .map((e) => e.i);
+}
+
+/** Position on a ring of `n` slots at slot `i`, centred at (cx, cy). */
+export function ringPoint(
