@@ -38,3 +38,19 @@ function el(name: string, attrs: Record<string, string | number> = {}): SVGEleme
   return node;
 }
 
+/** Render the double-helix strand view into the given SVG element. */
+export function renderHelix(
+  svg: SVGElement,
+  data: ViewerData,
+  opts: { width: number; height: number },
+): void {
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+  svg.setAttribute("viewBox", `0 0 ${opts.width} ${opts.height}`);
+
+  const nodes = data.nodes;
+  const order = helixOrder(nodes);
+  const maxC = maxChurn(nodes);
+
+  const cx = opts.width / 2;
+  const topPad = 40;
+  const usableH = opts.height - topPad - 40;
