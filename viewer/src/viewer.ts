@@ -23,3 +23,18 @@ import {
   lerp,
   maxChurn,
   ringPoint,
+  summaryText,
+  type ViewerData,
+} from "./core.js";
+
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+/** Create an SVG element with attributes in one call. */
+function el(name: string, attrs: Record<string, string | number> = {}): SVGElement {
+  const node = document.createElementNS(SVG_NS, name);
+  for (const [k, v] of Object.entries(attrs)) {
+    node.setAttribute(k, String(v));
+  }
+  return node;
+}
+
