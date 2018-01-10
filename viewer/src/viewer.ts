@@ -70,3 +70,19 @@ export function renderHelix(
     const xB = cx + Math.sin(angle + Math.PI) * amp;
     dA += `${s === 0 ? "M" : "L"}${xA.toFixed(2)},${y.toFixed(2)} `;
     dB += `${s === 0 ? "M" : "L"}${xB.toFixed(2)},${y.toFixed(2)} `;
+  }
+  strandA.setAttribute("d", dA);
+  strandB.setAttribute("d", dB);
+  svg.appendChild(strandA);
+  svg.appendChild(strandB);
+
+  order.forEach((nodeIndex, rank) => {
+    const node = nodes[nodeIndex];
+    const t = order.length > 1 ? rank / (order.length - 1) : 0;
+    const y = topPad + t * usableH;
+    const angle = t * turns * Math.PI * 2 + (rank % 2 === 0 ? 0 : Math.PI);
+    const x = cx + Math.sin(angle) * amp;
+
+    const r = churnRadius(node.churn, maxC);
+    const g = el("g", { class: "helix-node", "data-index": nodeIndex });
+
