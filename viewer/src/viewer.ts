@@ -133,3 +133,19 @@ export function renderAtlas(
 ): void {
   while (svg.firstChild) svg.removeChild(svg.firstChild);
   svg.setAttribute("viewBox", `0 0 ${opts.width} ${opts.height}`);
+
+  const nodes = data.nodes;
+  const n = nodes.length;
+  if (n === 0) return;
+
+  const cx = opts.width / 2;
+  const cy = opts.height / 2;
+  const radius = Math.min(cx, cy) - 60;
+  const maxC = maxChurn(nodes);
+
+  const ring = nodes.map((_, i) => ringPoint(i, n, cx, cy, radius));
+
+  const maxStrength = data.links.reduce((m, l) => Math.max(m, l.strength), 0) || 1;
+  data.links.forEach((link, li) => {
+    const a = ring[link.source];
+    const b = ring[link.target];
