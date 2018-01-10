@@ -86,3 +86,18 @@ export function renderHelix(
     const r = churnRadius(node.churn, maxC);
     const g = el("g", { class: "helix-node", "data-index": nodeIndex });
 
+    const dot = el("circle", {
+      cx: x,
+      cy: y,
+      r,
+      fill: concentrationColour(node.concentration),
+      stroke: "#0d1b1a",
+      "stroke-width": 1,
+    });
+    const dur = (2.4 - 1.6 * (node.churn / (maxC || 1))).toFixed(2);
+    dot.appendChild(
+      el("animate", {
+        attributeName: "r",
+        values: `${r};${(r * 1.18).toFixed(2)};${r}`,
+        dur: `${dur}s`,
+        repeatCount: "indefinite",
