@@ -101,3 +101,19 @@ export function renderHelix(
         values: `${r};${(r * 1.18).toFixed(2)};${r}`,
         dur: `${dur}s`,
         repeatCount: "indefinite",
+      }),
+    );
+    g.appendChild(dot);
+
+    const label = el("text", {
+      x: x + r + 4,
+      y: y + 3,
+      "font-size": 9,
+      fill: "#cfe8e6",
+      "font-family": "monospace",
+    });
+    label.textContent = basename(node.path);
+    g.appendChild(label);
+
+    const title = el("title");
+    title.textContent =
