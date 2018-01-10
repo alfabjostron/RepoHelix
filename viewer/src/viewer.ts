@@ -117,3 +117,19 @@ export function renderHelix(
 
     const title = el("title");
     title.textContent =
+      `${node.path}\nchurn ${node.churn} · commits ${node.commits} · ` +
+      `authors ${node.authors} · concentration ${node.concentration.toFixed(2)}`;
+    g.appendChild(title);
+
+    svg.appendChild(g);
+  });
+}
+
+/** Render the radial co-change atlas. */
+export function renderAtlas(
+  svg: SVGElement,
+  data: ViewerData,
+  opts: { width: number; height: number },
+): void {
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+  svg.setAttribute("viewBox", `0 0 ${opts.width} ${opts.height}`);
