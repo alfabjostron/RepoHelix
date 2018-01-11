@@ -164,3 +164,19 @@ export function renderAtlas(
     path.appendChild(
       el("animate", {
         attributeName: "opacity",
+        values: `0;${(0.25 + 0.6 * rel).toFixed(2)}`,
+        dur: "0.8s",
+        begin: `${(li * 0.06).toFixed(2)}s`,
+        fill: "freeze",
+      }),
+    );
+    const title = el("title");
+    title.textContent =
+      `${nodes[link.source].path} ↔ ${nodes[link.target].path}\n` +
+      `strength ${link.strength.toFixed(2)} · together ${link.together}`;
+    path.appendChild(title);
+    svg.appendChild(path);
+  });
+
+  ring.forEach((p, i) => {
+    const node = nodes[i];
