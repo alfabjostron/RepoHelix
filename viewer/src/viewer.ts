@@ -149,3 +149,18 @@ export function renderAtlas(
   data.links.forEach((link, li) => {
     const a = ring[link.source];
     const b = ring[link.target];
+    if (!a || !b) return;
+    const rel = link.strength / maxStrength;
+    const bow = lerp(0.85, 0.2, rel);
+    const mx = lerp((a.x + b.x) / 2, cx, bow);
+    const my = lerp((a.y + b.y) / 2, cy, bow);
+    const path = el("path", {
+      d: `M${a.x.toFixed(2)},${a.y.toFixed(2)} Q${mx.toFixed(2)},${my.toFixed(2)} ${b.x.toFixed(2)},${b.y.toFixed(2)}`,
+      fill: "none",
+      stroke: concentrationColour(0.3 + 0.5 * rel),
+      "stroke-width": (0.6 + 4 * rel).toFixed(2),
+      opacity: 0,
+    });
+    path.appendChild(
+      el("animate", {
+        attributeName: "opacity",
