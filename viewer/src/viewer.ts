@@ -180,3 +180,19 @@ export function renderAtlas(
 
   ring.forEach((p, i) => {
     const node = nodes[i];
+    const r = churnRadius(node.churn, maxC) * 0.8 + 2;
+    const dot = el("circle", {
+      cx: p.x,
+      cy: p.y,
+      r,
+      fill: concentrationColour(node.concentration),
+      stroke: "#0d1b1a",
+      "stroke-width": 1,
+    });
+    const title = el("title");
+    title.textContent = `${node.path}\nchurn ${node.churn} · commits ${node.commits}`;
+    dot.appendChild(title);
+    svg.appendChild(dot);
+
+    if (node.churn >= maxC * 0.15) {
+      const outward = 14;
