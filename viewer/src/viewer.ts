@@ -196,3 +196,19 @@ export function renderAtlas(
 
     if (node.churn >= maxC * 0.15) {
       const outward = 14;
+      const lx = cx + Math.cos(p.angle) * (radius + outward);
+      const ly = cy + Math.sin(p.angle) * (radius + outward);
+      const anchor =
+        Math.cos(p.angle) < -0.1 ? "end" : Math.cos(p.angle) > 0.1 ? "start" : "middle";
+      const label = el("text", {
+        x: lx,
+        y: ly,
+        "font-size": 9,
+        fill: "#cfe8e6",
+        "font-family": "monospace",
+        "text-anchor": anchor,
+      });
+      label.textContent = basename(node.path);
+      svg.appendChild(label);
+    }
+  });
