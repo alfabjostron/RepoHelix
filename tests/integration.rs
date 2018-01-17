@@ -20,3 +20,14 @@ fn fixture_loads_expected_shape() {
     let analysis = analyze(&history, &Params::default());
     assert_eq!(analysis.summary.authors, 4);
     assert_eq!(analysis.summary.files, 18);
+}
+
+#[test]
+fn handlers_is_the_top_hotspot() {
+    let history = load_from_log(fixture_path(), None).unwrap();
+    let analysis = analyze(&history, &Params::default());
+    assert_eq!(analysis.hotspots[0].path, "src/handlers.rs");
+    // Its normalized score is the maximum, so exactly 1.0.
+    assert!((analysis.hotspots[0].score - 1.0).abs() < 1e-9);
+}
+
