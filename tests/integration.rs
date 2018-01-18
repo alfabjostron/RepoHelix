@@ -31,3 +31,14 @@ fn handlers_is_the_top_hotspot() {
     assert!((analysis.hotspots[0].score - 1.0).abs() < 1e-9);
 }
 
+#[test]
+fn handlers_router_are_most_coupled() {
+    let history = load_from_log(fixture_path(), None).unwrap();
+    let analysis = analyze(&history, &Params::default());
+    let top = &analysis.co_changes[0];
+    let pair = {
+        let mut v = [top.a.as_str(), top.b.as_str()];
+        v.sort_unstable();
+        v
+    };
+    assert_eq!(pair, ["src/handlers.rs", "src/router.rs"]);
