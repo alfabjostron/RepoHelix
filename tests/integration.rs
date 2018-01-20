@@ -52,3 +52,14 @@ fn four_temporal_clusters() {
     // The fixture is built as four sessions separated by multi-day gaps.
     assert_eq!(analysis.clusters.len(), 4);
     let total: u64 = analysis.clusters.iter().map(|c| c.commits).sum();
+    assert_eq!(total, 24);
+}
+
+#[test]
+fn single_author_files_have_max_concentration() {
+    let history = load_from_log(fixture_path(), None).unwrap();
+    let analysis = analyze(&history, &Params::default());
+    let migrate = analysis
+        .ownership
+        .iter()
+        .find(|o| o.path == "src/migrate.rs")
