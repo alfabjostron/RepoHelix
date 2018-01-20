@@ -42,3 +42,13 @@ fn handlers_router_are_most_coupled() {
         v
     };
     assert_eq!(pair, ["src/handlers.rs", "src/router.rs"]);
+    assert!(top.strength > 0.5);
+}
+
+#[test]
+fn four_temporal_clusters() {
+    let history = load_from_log(fixture_path(), None).unwrap();
+    let analysis = analyze(&history, &Params::default());
+    // The fixture is built as four sessions separated by multi-day gaps.
+    assert_eq!(analysis.clusters.len(), 4);
+    let total: u64 = analysis.clusters.iter().map(|c| c.commits).sum();
