@@ -85,3 +85,13 @@ fn output_is_deterministic() {
 fn json_report_declares_it_is_not_a_personnel_judgment() {
     let history = load_from_log(fixture_path(), None).unwrap();
     let analysis = analyze(&history, &Params::default());
+    let json = report::to_json(&analysis, false);
+    assert!(json.contains("not"));
+    assert!(json.contains("personnel judgments") || json.contains("not measures"));
+}
+
+#[test]
+fn max_commits_limits_history() {
+    let history = load_from_log(fixture_path(), Some(4)).unwrap();
+    assert_eq!(history.commit_count(), 4);
+}
