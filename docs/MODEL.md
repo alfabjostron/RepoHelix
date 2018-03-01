@@ -80,3 +80,16 @@ count(a)      = number of commits that changed a
 count(b)      = number of commits that changed b
 
 strength(a,b)   = together / (count(a) + count(b) - together)   (Jaccard index)
+confidence(a,b) = together / max(count(a), count(b))            (association rule)
+```
+
+- **strength** is symmetric and lives in `[0, 1]`. `1.0` means the two files
+  *always* change together and never apart.
+- **confidence** answers "given the more frequently changed of the pair
+  changed, how often did the other change too?" It is the association-rule
+  confidence using the busier file as antecedent, chosen for stability.
+
+Two guards keep coupling honest:
+
+1. `--min-cochange` (default 2): a pair must co-occur at least this many times
+   to be reported, filtering one-off coincidences.
