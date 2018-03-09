@@ -118,3 +118,16 @@ working or how hard.
 
 For each file we count commits per author identity (email preferred, name as
 fallback). Let file `f` have identities with commit shares `p_1 … p_k` summing
+to 1, and `k` distinct identities.
+
+```
+HHI(f) = Σ p_i²                                  (Herfindahl–Hirschman Index)
+
+concentration(f) = 1                              if k == 1
+                 = (HHI - 1/k) / (1 - 1/k)        otherwise   (normalized to 0..1)
+
+top_share(f)     = largest single p_i
+```
+
+- `concentration = 1.0` means a single identity made every recorded change to
+  the file — the classic **bus factor of one**.
