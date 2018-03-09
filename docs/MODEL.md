@@ -106,3 +106,15 @@ a missing abstraction.
 ## Temporal clusters (development sessions)
 
 Commits are sorted ascending by time. A new **cluster** begins whenever the gap
+to the previous commit exceeds `--cluster-gap` seconds (default `21600`, i.e.
+six hours). Each cluster reports its commit count, distinct files touched, and
+total churn.
+
+Clusters approximate *sessions* — bursts of related work such as a feature
+push or a release-hardening pass. They are a lens on *tempo*, not on who was
+working or how hard.
+
+## Ownership concentration
+
+For each file we count commits per author identity (email preferred, name as
+fallback). Let file `f` have identities with commit shares `p_1 … p_k` summing
