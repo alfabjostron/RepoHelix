@@ -144,3 +144,16 @@ never appear in the ownership section; they are used solely as grouping keys.
 
 ## Metrics are not personnel judgments
 
+**Read this before drawing any conclusion about a person.**
+
+Every metric in `repohelix` measures *files and change events*. None of them
+measures a person's productivity, skill, effort, or worth. Specifically:
+
+- **Churn and commit counts** reflect the nature of the code, not the ability of
+  whoever touched it. Boilerplate, generated files, and integration points churn
+  heavily by design.
+- **Ownership concentration** is a *risk signal about knowledge distribution*
+  (the "bus factor"), not a scoreboard. A concentration of `1.0` does not mean
+  someone is doing great work or hoarding — it means the project is exposed if
+  that knowledge becomes unavailable. The remedy is pairing, review, and
+  documentation, never blame.
