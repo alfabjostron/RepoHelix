@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" width="640" height="520"
+     font-family="ui-monospace, SFMono-Regular, Menlo, monospace" role="img"
+     aria-label="repohelix co-change atlas: files arranged on a ring with chords whose weight encodes temporal-coupling strength">
+  <title>repohelix: co-change atlas (nebula fixture)</title>
+  <desc>Files on a ring; each chord links two files that changed together in the
+        synthetic nebula history. Heavier, straighter chords mean stronger
+        temporal coupling. Strength is a Jaccard-style ratio of shared commits.</desc>
+  <defs>
+    <radialGradient id="atlasbg" cx="0.5" cy="0.45" r="0.6">
