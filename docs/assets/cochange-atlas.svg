@@ -8,3 +8,12 @@
         temporal coupling. Strength is a Jaccard-style ratio of shared commits.</desc>
   <defs>
     <radialGradient id="atlasbg" cx="0.5" cy="0.45" r="0.6">
+      <stop offset="0" stop-color="#123430"/>
+      <stop offset="1" stop-color="#08100f"/>
+    </radialGradient>
+    <radialGradient id="core" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#43c8bd" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#43c8bd" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
