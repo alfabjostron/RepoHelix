@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 460" width="640" height="460"
+     font-family="ui-monospace, SFMono-Regular, Menlo, monospace" role="img"
+     aria-label="repohelix helix: files threaded along a double-helix strand, radius encodes churn, colour encodes ownership concentration">
+  <title>repohelix: repository helix (nebula fixture)</title>
+  <desc>A double-helix strand of the nine busiest files from the synthetic nebula
+        history. Node radius encodes churn; colour runs from teal (shared
+        stewardship) to amber (single-owner / bus-factor risk). Metrics describe
+        code activity, not people.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d211f"/>
