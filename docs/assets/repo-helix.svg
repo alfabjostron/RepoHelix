@@ -42,3 +42,13 @@
   <!-- Rungs connecting the strands. -->
   <g stroke="#1d3330" stroke-width="1.4" opacity="0.7">
     <line x1="120" y1="90"  x2="520" y2="90"/>
+    <line x1="470" y1="130" x2="170" y2="130"/>
+    <line x1="200" y1="180" x2="440" y2="180"/>
+    <line x1="470" y1="230" x2="170" y2="230"/>
+    <line x1="200" y1="280" x2="440" y2="280"/>
+    <line x1="470" y1="330" x2="170" y2="330"/>
+    <line x1="120" y1="300" x2="520" y2="300"/>
+  </g>
+
+  <!-- File nodes. Radius ~ sqrt(churn); colour ~ concentration.
+       Values taken directly from the fixture analysis. -->
