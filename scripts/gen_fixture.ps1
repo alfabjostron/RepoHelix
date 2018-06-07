@@ -36,3 +36,12 @@ $commits = @(
 
     # ---- Session 2: data layer (day 3) ----
     @{ h='b2000001'; a='cy';  t=1704326400; s='Add storage module';
+       f=@('120 0 src/storage.rs','9 0 src/lib.rs','7 2 Cargo.toml') },
+    @{ h='b2000002'; a='cy';  t=1704328200; s='Storage: connection pooling';
+       f=@('55 8 src/storage.rs','20 0 src/config.rs') },
+    @{ h='b2000003'; a='ada'; t=1704330000; s='Handlers use storage';
+       f=@('40 6 src/handlers.rs','30 4 src/storage.rs') },
+    @{ h='b2000004'; a='ada'; t=1704331800; s='Add user model';
+       f=@('65 0 src/models/user.rs','12 0 src/lib.rs') },
+    @{ h='b2000005'; a='cy';  t=1704333600; s='User CRUD in handlers';
+       f=@('80 10 src/handlers.rs','35 5 src/models/user.rs','15 3 src/storage.rs') },
