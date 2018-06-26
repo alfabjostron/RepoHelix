@@ -45,3 +45,13 @@ $commits = @(
        f=@('65 0 src/models/user.rs','12 0 src/lib.rs') },
     @{ h='b2000005'; a='cy';  t=1704333600; s='User CRUD in handlers';
        f=@('80 10 src/handlers.rs','35 5 src/models/user.rs','15 3 src/storage.rs') },
+
+    # ---- Session 3: features + churn on handlers/router (day 9) ----
+    @{ h='c3000001'; a='bo';  t=1704844800; s='Add auth middleware';
+       f=@('95 0 src/auth.rs','25 4 src/router.rs','18 6 src/handlers.rs') },
+    @{ h='c3000002'; a='bo';  t=1704846600; s='Auth: token parsing';
+       f=@('40 12 src/auth.rs','10 2 src/config.rs') },
+    @{ h='c3000003'; a='dee'; t=1704848400; s='Add session model';
+       f=@('50 0 src/models/session.rs','20 8 src/auth.rs','8 0 src/lib.rs') },
+    @{ h='c3000004'; a='dee'; t=1704850200; s='Sessions in handlers';
+       f=@('60 15 src/handlers.rs','30 5 src/models/session.rs','12 3 src/router.rs') },
