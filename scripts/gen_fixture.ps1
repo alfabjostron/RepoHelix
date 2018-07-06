@@ -73,3 +73,13 @@ $commits = @(
        f=@('35 20 src/config.rs','8 3 src/main.rs') },
     @{ h='d4000005'; a='ada'; t=1705802400; s='Docs: architecture notes';
        f=@('120 10 README.md','40 0 docs/ARCHITECTURE.md') },
+    @{ h='d4000006'; a='cy';  t=1705804200; s='Add integration tests';
+       f=@('90 0 tests/integration.rs','15 5 src/lib.rs') },
+    @{ h='d4000007'; a='dee'; t=1705806000; s='Fix router edge cases';
+       f=@('30 25 src/router.rs','20 12 src/handlers.rs') },
+    @{ h='d4000008'; a='bo';  t=1705807800; s='Add logo asset';
+       f=@('- - assets/nebula-logo.png','5 0 README.md') }
+)
+
+$sb = New-Object System.Text.StringBuilder
+foreach ($c in $commits) {
