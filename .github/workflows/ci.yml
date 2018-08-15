@@ -33,3 +33,18 @@ jobs:
         run: cargo clippy --all-targets -- -D warnings
 
       - name: Build
+        run: cargo build --release
+
+      - name: Test
+        run: cargo test --all
+
+      - name: Smoke-test the fixture demo
+        run: |
+          cargo run --release -- analyze --log fixtures/nebula.gitlog --format json --compact > /tmp/report.json
+          test -s /tmp/report.json
+          grep -q 'repohelix/analysis/v1' /tmp/report.json
+          cargo run --release -- viewer-data --log fixtures/nebula.gitlog --out /tmp/viewer.json
+          grep -q 'repohelix/viewer/v1' /tmp/viewer.json
+
+  viewer:
+    name: TypeScript viewer (typecheck, test)
