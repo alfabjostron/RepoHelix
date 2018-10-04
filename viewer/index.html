@@ -38,3 +38,18 @@
         border: 1px solid var(--line);
         border-radius: 8px;
         font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 12.5px;
+        color: var(--muted);
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        padding: 18px 28px 32px;
+      }
+      @media (max-width: 900px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+      .card {
