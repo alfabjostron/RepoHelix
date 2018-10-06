@@ -8,3 +8,11 @@ authors = ["RepoHelix contributors"]
 repository = "https://github.com/alfabjostron/RepoHelix"
 readme = "README.md"
 keywords = ["git", "history", "temporal-coupling", "churn", "analysis"]
+categories = ["command-line-utilities", "development-tools"]
+
+[[bin]]
+name = "repohelix"
+path = "src/main.rs"
+
+[lib]
+name = "repohelix"
