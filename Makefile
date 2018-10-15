@@ -29,3 +29,15 @@ help: ## Show this help
 build: ## Build the release binary
 	$(CARGO) build --release
 
+.PHONY: test
+test: ## Run Rust tests
+	$(CARGO) test
+
+.PHONY: fmt
+fmt: ## Format Rust sources
+	$(CARGO) fmt
+
+.PHONY: fmt-check
+fmt-check: ## Verify Rust formatting
+	$(CARGO) fmt --check
+
