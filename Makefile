@@ -5,3 +5,15 @@
 # machine without Node installed.
 
 CARGO ?= cargo
+FIXTURE ?= fixtures/nebula.gitlog
+
+.DEFAULT_GOAL := help
+
+.PHONY: help
+help: ## Show this help
+	@echo "repohelix make targets:"
+	@echo "  build         Build the release binary"
+	@echo "  test          Run Rust unit + integration tests"
+	@echo "  fmt           Format Rust sources"
+	@echo "  fmt-check     Verify formatting"
+	@echo "  clippy        Lint with clippy (if installed)"
