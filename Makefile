@@ -41,3 +41,15 @@ fmt: ## Format Rust sources
 fmt-check: ## Verify Rust formatting
 	$(CARGO) fmt --check
 
+.PHONY: clippy
+clippy: ## Lint with clippy
+	$(CARGO) clippy --all-targets -- -D warnings
+
+.PHONY: demo
+demo: build ## Text report for the fixture
+	$(CARGO) run --release -- analyze --log $(FIXTURE) --format text
+
+.PHONY: demo-json
+demo-json: build ## JSON report for the fixture
+	$(CARGO) run --release -- analyze --log $(FIXTURE) --format json
+
