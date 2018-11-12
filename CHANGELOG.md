@@ -6,3 +6,4 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [0.1.0] — 2024-01-21
 
+The first release. `repohelix` reads Git history and draws two maps of it — a
