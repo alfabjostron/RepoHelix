@@ -12,3 +12,4 @@ dependency-free TypeScript viewer.
 
 ### Added
 
+- **CLI** with `analyze`, `viewer-data`, `help`, and `version` commands.
