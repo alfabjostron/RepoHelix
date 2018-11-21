@@ -10,3 +10,4 @@ The first release. `repohelix` reads Git history and draws two maps of it — a
 helix and a co-change atlas — with a standard-library-only Rust core and a
 dependency-free TypeScript viewer.
 
+### Added
