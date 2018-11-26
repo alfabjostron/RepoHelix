@@ -16,3 +16,4 @@ dependency-free TypeScript viewer.
 - **Live repository analysis** via non-interactive `git log --numstat`
   (`--no-pager`, `--no-color`, `--no-renames`, and batch-forcing environment
   variables).
+- **Fixture-log import** (`--log`) that reuses the live parser for byte-for-byte
