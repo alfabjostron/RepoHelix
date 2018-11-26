@@ -17,3 +17,4 @@ dependency-free TypeScript viewer.
   (`--no-pager`, `--no-color`, `--no-renames`, and batch-forcing environment
   variables).
 - **Fixture-log import** (`--log`) that reuses the live parser for byte-for-byte
+  reproducible demos and CI.
