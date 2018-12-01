@@ -24,3 +24,4 @@ dependency-free TypeScript viewer.
   (normalized Herfindahl index, anonymized identities).
 - **Reports**: pretty/compact JSON (`schema: repohelix/analysis/v1`) and a text
   table report, both carrying the "not a personnel judgment" reminder.
+- **Viewer payload** builder (`schema: repohelix/viewer/v1`), capped at 64 nodes.
