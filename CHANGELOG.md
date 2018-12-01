@@ -19,3 +19,4 @@ dependency-free TypeScript viewer.
 - **Fixture-log import** (`--log`) that reuses the live parser for byte-for-byte
   reproducible demos and CI.
 - **Metrics**: per-file churn, hotspots (geometric mean of normalized churn and
+  frequency), temporal coupling (Jaccard strength + association confidence),
