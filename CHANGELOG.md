@@ -21,3 +21,4 @@ dependency-free TypeScript viewer.
 - **Metrics**: per-file churn, hotspots (geometric mean of normalized churn and
   frequency), temporal coupling (Jaccard strength + association confidence),
   temporal clusters (session detection by time gap), and ownership concentration
+  (normalized Herfindahl index, anonymized identities).
