@@ -23,3 +23,4 @@ dependency-free TypeScript viewer.
   temporal clusters (session detection by time gap), and ownership concentration
   (normalized Herfindahl index, anonymized identities).
 - **Reports**: pretty/compact JSON (`schema: repohelix/analysis/v1`) and a text
+  table report, both carrying the "not a personnel judgment" reminder.
