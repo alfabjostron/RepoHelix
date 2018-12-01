@@ -22,3 +22,4 @@ dependency-free TypeScript viewer.
   frequency), temporal coupling (Jaccard strength + association confidence),
   temporal clusters (session detection by time gap), and ownership concentration
   (normalized Herfindahl index, anonymized identities).
+- **Reports**: pretty/compact JSON (`schema: repohelix/analysis/v1`) and a text
