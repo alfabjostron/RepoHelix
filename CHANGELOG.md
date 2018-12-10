@@ -26,3 +26,4 @@ dependency-free TypeScript viewer.
   table report, both carrying the "not a personnel judgment" reminder.
 - **Viewer payload** builder (`schema: repohelix/viewer/v1`), capped at 64 nodes.
 - **Minimal std-only JSON writer** with correct escaping, stable key order, and
+  finite-number safety.
