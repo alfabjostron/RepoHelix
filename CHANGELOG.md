@@ -27,3 +27,4 @@ dependency-free TypeScript viewer.
 - **Viewer payload** builder (`schema: repohelix/viewer/v1`), capped at 64 nodes.
 - **Minimal std-only JSON writer** with correct escaping, stable key order, and
   finite-number safety.
+- **TypeScript viewer**: DOM/SVG-only helix and co-change atlas with hover
