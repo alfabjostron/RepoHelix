@@ -32,3 +32,4 @@ dependency-free TypeScript viewer.
 - **Synthetic fixture** `fixtures/nebula.gitlog` modeling four development
   sessions, plus generator scripts for the fixture and the viewer dataset.
 - **Documentation**: a 15–22 KB README with the DNA/cartography identity, two
+  local animated SVGs, and `docs/MODEL.md` defining every formula and the ethics
