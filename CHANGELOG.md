@@ -29,3 +29,4 @@ dependency-free TypeScript viewer.
   finite-number safety.
 - **TypeScript viewer**: DOM/SVG-only helix and co-change atlas with hover
   tooltips, split into a pure `core` module and an SVG-rendering module.
+- **Synthetic fixture** `fixtures/nebula.gitlog` modeling four development
