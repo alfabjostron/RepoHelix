@@ -28,3 +28,4 @@ dependency-free TypeScript viewer.
 - **Minimal std-only JSON writer** with correct escaping, stable key order, and
   finite-number safety.
 - **TypeScript viewer**: DOM/SVG-only helix and co-change atlas with hover
+  tooltips, split into a pure `core` module and an SVG-rendering module.
