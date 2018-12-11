@@ -31,3 +31,4 @@ dependency-free TypeScript viewer.
   tooltips, split into a pure `core` module and an SVG-rendering module.
 - **Synthetic fixture** `fixtures/nebula.gitlog` modeling four development
   sessions, plus generator scripts for the fixture and the viewer dataset.
+- **Documentation**: a 15–22 KB README with the DNA/cartography identity, two
