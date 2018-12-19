@@ -38,3 +38,4 @@ dependency-free TypeScript viewer.
   core test suite.
 - **Tooling**: `Makefile`, GitHub Actions CI, MIT `LICENSE`.
 
+### Known limitations
