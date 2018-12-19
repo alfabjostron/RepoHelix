@@ -35,3 +35,4 @@ dependency-free TypeScript viewer.
   local animated SVGs, and `docs/MODEL.md` defining every formula and the ethics
   of interpretation.
 - **Tests**: 41 Rust unit + integration tests and a zero-framework TypeScript
+  core test suite.
