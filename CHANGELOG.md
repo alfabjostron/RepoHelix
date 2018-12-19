@@ -37,3 +37,4 @@ dependency-free TypeScript viewer.
 - **Tests**: 41 Rust unit + integration tests and a zero-framework TypeScript
   core test suite.
 - **Tooling**: `Makefile`, GitHub Actions CI, MIT `LICENSE`.
+
