@@ -39,3 +39,4 @@ dependency-free TypeScript viewer.
 - **Tooling**: `Makefile`, GitHub Actions CI, MIT `LICENSE`.
 
 ### Known limitations
+
