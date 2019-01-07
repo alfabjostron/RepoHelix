@@ -40,3 +40,4 @@ dependency-free TypeScript viewer.
 
 ### Known limitations
 
+- Renames are not followed; a rename appears as a delete + add.
