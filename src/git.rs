@@ -89,3 +89,20 @@ pub fn run_log(repo: &Path, max_commits: Option<usize>) -> Result<String, GitErr
         return Err(GitError::Failed {
             code: output.status.code(),
             stderr,
+        });
+    }
+    String::from_utf8(output.stdout).map_err(|_| GitError::Encoding)
+}
+
+/// Check that a directory looks like a Git repository by asking git.
+pub fn is_git_repo(repo: &Path) -> bool {
+    Command::new("git")
+        .arg("-C")
+        .arg(repo)
+        .arg("rev-parse")
+        .arg("--is-inside-work-tree")
+        .env("GIT_TERMINAL_PROMPT", "0")
+        .output()
+        .map(|o| o.status.success())
+        .unwrap_or(false)
+// review note
