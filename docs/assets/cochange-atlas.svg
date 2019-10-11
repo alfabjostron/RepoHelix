@@ -61,3 +61,13 @@
     <path d="M200,405 Q280,392 320,460" stroke="rgb(100,198,148)" stroke-width="1.4" opacity="0">
       <animate attributeName="opacity" values="0;0.41" dur="0.9s" begin="1.05s" fill="freeze"/>
     </path>
+    <!-- auth.rs ↔ handlers.rs : strength 0.17 -->
+    <path d="M150,290 Q268,210 320,120" stroke="rgb(96,198,151)" stroke-width="1.3" opacity="0">
+      <animate attributeName="opacity" values="0;0.38" dur="0.9s" begin="1.25s" fill="freeze"/>
+    </path>
+  </g>
+
+  <!-- Ring nodes with labels. Radius ~ churn. -->
+  <g stroke="#0d1b1a">
+    <circle cx="320" cy="120" r="14" fill="rgb(53,198,168)"/>
+    <circle cx="440" cy="175" r="12" fill="rgb(48,197,175)"/>
