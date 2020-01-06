@@ -56,3 +56,17 @@
   <g>
     <circle cx="520" cy="90" r="18" fill="rgb(53,198,168)" stroke="#0d1b1a">
       <animate attributeName="r" values="18;21.2;18" dur="1.6s" repeatCount="indefinite"/>
+    </circle>
+    <text x="500" y="76" fill="#cfe8e6" font-size="10" text-anchor="end">handlers.rs · 684</text>
+  </g>
+  <!-- router.rs churn 410 -->
+  <g>
+    <circle cx="170" cy="130" r="14.4" fill="rgb(48,197,175)" stroke="#0d1b1a">
+      <animate attributeName="r" values="14.4;17;14.4" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <text x="190" y="118" fill="#cfe8e6" font-size="10">router.rs · 410</text>
+  </g>
+  <!-- storage.rs churn 343 (some concentration) -->
+  <g>
+    <circle cx="440" cy="180" r="13.2" fill="rgb(69,197,157)" stroke="#0d1b1a">
+      <animate attributeName="r" values="13.2;15.6;13.2" dur="1.9s" repeatCount="indefinite"/>
