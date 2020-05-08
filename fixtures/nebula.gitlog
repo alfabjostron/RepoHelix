@@ -32,4 +32,12 @@
 80	10	src/handlers.rs
 35	5	src/models/user.rs
 15	3	src/storage.rs
-
+REPOHELIX_COMMITc3000001Bo Tanakabo@nebula.example1704844800Add auth middleware
+95	0	src/auth.rs
+25	4	src/router.rs
+18	6	src/handlers.rs
+REPOHELIX_COMMITc3000002Bo Tanakabo@nebula.example1704846600Auth: token parsing
+40	12	src/auth.rs
+10	2	src/config.rs
+REPOHELIX_COMMITc3000003Dee Marshdee@nebula.example1704848400Add session model
+50	0	src/models/session.rs
