@@ -87,3 +87,23 @@ confidence(a,b) = together / max(count(a), count(b))            (association rul
   *always* change together and never apart.
 - **confidence** answers "given the more frequently changed of the pair
   changed, how often did the other change too?" It is the association-rule
+  confidence using the busier file as antecedent, chosen for stability.
+
+Two guards keep coupling honest:
+
+1. `--min-cochange` (default 2): a pair must co-occur at least this many times
+   to be reported, filtering one-off coincidences.
+2. `--max-files-cochange` (default 40): commits touching more files than this
+   (bulk imports, vendor drops, formatting sweeps) are excluded from pair
+   counting, because they would manufacture spurious coupling between unrelated
+   files. Their singleton counts are still recorded so confidence denominators
+   stay correct.
+
+Temporal coupling is the tool's most actionable signal: strongly coupled files
+that live far apart in the directory tree often indicate a hidden dependency or
+a missing abstraction.
+
+## Temporal clusters (development sessions)
+
+Commits are sorted ascending by time. A new **cluster** begins whenever the gap
+to the previous commit exceeds `--cluster-gap` seconds (default `21600`, i.e.
