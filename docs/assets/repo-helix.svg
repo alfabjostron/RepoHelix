@@ -16,3 +16,16 @@
       <stop offset="0" stop-color="#43c8bd" stop-opacity="0.35"/>
       <stop offset="1" stop-color="#43c8bd" stop-opacity="0"/>
     </radialGradient>
+  </defs>
+
+  <rect width="640" height="460" fill="url(#bg)"/>
+  <ellipse cx="320" cy="230" rx="260" ry="180" fill="url(#glow)">
+    <animate attributeName="rx" values="240;280;240" dur="9s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <text x="24" y="34" fill="#cfe8e6" font-size="17" font-weight="600">repohelix · helix strand</text>
+  <text x="24" y="52" fill="#7fa8a3" font-size="11">nebula fixture · 24 commits · 4 authors · 20-day span</text>
+
+  <!-- Two backbone strands weaving in anti-phase. The dasharray march gives a
+       flowing sense of transcription without any script. -->
+  <g stroke-linecap="round" fill="none">
