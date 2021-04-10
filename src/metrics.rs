@@ -536,3 +536,76 @@ mod tests {
         assert_eq!(a_stat.commits, 4);
         assert_eq!(a_stat.added, 22);
         assert_eq!(a_stat.removed, 4);
+        assert_eq!(a_stat.churn, 26);
+        assert_eq!(a_stat.authors, 2);
+    }
+
+    #[test]
+    fn cochange_detects_ab_pair() {
+        let a = analyze(&sample(), &Params::default());
+        let ab = a
+            .co_changes
+            .iter()
+            .find(|p| p.a == "a.rs" && p.b == "b.rs")
+            .expect("a.rs/b.rs should co-change");
+        assert_eq!(ab.together, 2);
+        assert_eq!(ab.count_a, 4);
+        assert_eq!(ab.count_b, 2);
+        // union = 4 + 2 - 2 = 4 -> strength 0.5
+        assert!((ab.strength - 0.5).abs() < 1e-9);
+        // confidence = together / max(count) = 2/4 = 0.5
+        assert!((ab.confidence - 0.5).abs() < 1e-9);
+    }
+
+    #[test]
+    fn ownership_single_author_is_max_concentration() {
+        // c.rs only touched by bob -> concentration 1.0
+        let a = analyze(&sample(), &Params::default());
+        let c = a.ownership.iter().find(|o| o.path == "c.rs").unwrap();
+        assert_eq!(c.authors, 1);
+        assert!((c.concentration - 1.0).abs() < 1e-9);
+        assert!((c.top_share - 1.0).abs() < 1e-9);
+    }
+
+    #[test]
+    fn ownership_shared_lower_concentration() {
+        let a = analyze(&sample(), &Params::default());
+        let f = a.ownership.iter().find(|o| o.path == "a.rs").unwrap();
+        assert_eq!(f.authors, 2);
+        // ada 3, bob 1 -> shares 0.75/0.25, hhi=0.625, norm=(0.625-0.5)/0.5=0.25
+        assert!((f.concentration - 0.25).abs() < 1e-9);
+        assert!((f.top_share - 0.75).abs() < 1e-9);
+    }
+
+    #[test]
+    fn clusters_split_on_large_gap() {
+        // c1 at t=100, others near t=3000-4000. Default gap 6h=21600s.
+        // 3000-100 = 2900 < 21600 so actually all one cluster; shrink gap.
+        let p = Params {
+            cluster_gap_secs: 1000,
+            ..Params::default()
+        };
+        let a = analyze(&sample(), &p);
+        // c1(100) isolated, then c2(3000),c3(3500),c4(4000) within 1000 gaps.
+        assert_eq!(a.clusters.len(), 2);
+        assert_eq!(a.clusters[0].commits, 1);
+        assert_eq!(a.clusters[1].commits, 3);
+    }
+
+    #[test]
+    fn summary_totals() {
+        let a = analyze(&sample(), &Params::default());
+        assert_eq!(a.summary.commits, 4);
+        assert_eq!(a.summary.files, 3);
+        assert_eq!(a.summary.authors, 2);
+        assert_eq!(a.summary.first_commit, 100);
+        assert_eq!(a.summary.last_commit, 4000);
+    }
+
+    #[test]
+    fn hotspot_top_is_most_active_file() {
+        let a = analyze(&sample(), &Params::default());
+        assert_eq!(a.hotspots[0].path, "a.rs");
+        assert!(a.hotspots[0].score > 0.0);
+    }
+// review note
