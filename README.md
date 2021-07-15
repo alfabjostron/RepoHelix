@@ -278,3 +278,50 @@ pwsh -File ../scripts/gen_viewer_data.ps1   # writes viewer/data.js
 
 The viewer is split into two modules:
 
+- **`src/core.ts`** — pure, DOM-free math and data shaping (colour ramps, churn
+  scaling, ring layout, ordering, validation, summary text). This is what the
+  unit tests exercise under plain Node.
+- **`src/viewer.ts`** — the SVG rendering built on top of `core`, plus the
+  auto-mount glue.
+
+No framework, no bundler, no CDN, no network. The only dev dependency is
+TypeScript itself, and even that is optional if you write the JS by hand.
+
+---
+
+## The fixture format (deterministic demos)
+
+A **fixture log** is simply captured `git log --numstat` output using the custom
+record/field separators `repohelix` requests. Because the parser is the same one
+used for live repositories, a fixture behaves identically to a real repo — but is
+byte-for-byte reproducible.
+
+Regenerate the bundled `nebula` fixture with:
+
+```sh
+pwsh -File scripts/gen_fixture.ps1     # writes fixtures/nebula.gitlog
+```
+
+The generator encodes a deliberate story across four development sessions
+(clusters): a bootstrap, a data layer, a feature push, and a hardening pass. That
+story is what produces the hotspot on `handlers.rs`, the strong
+`handlers ↔ router` coupling, and the single-owner files like `migrate.rs`. The
+integration tests assert on exactly these outcomes, so the fixture doubles as a
+golden dataset.
+
+To capture your *own* fixture from a real repo, run `repohelix analyze --repo .`
+inside it — or record git's raw output — and store it under `fixtures/`.
+
+---
+
+## Architecture
+
+```
+repohelix/
+├── Cargo.toml, Cargo.lock      # zero-dependency Rust manifest
+├── src/
+│   ├── main.rs                 # CLI entry point, output emission
+│   ├── lib.rs                  # public API, pipeline (load_from_repo/log)
+│   ├── cli.rs                  # hand-rolled argument parsing
+│   ├── git.rs                  # non-interactive git invocation
+│   ├── parse.rs                # git-log → History parser (also fixtures)
