@@ -86,3 +86,16 @@
       <animate attributeName="r" values="8.8;10.4;8.8" dur="2.1s" repeatCount="indefinite"/>
     </circle>
     <text x="420" y="284" fill="#cfe8e6" font-size="10" text-anchor="end">config.rs · 149</text>
+  </g>
+  <!-- models/user.rs churn 105 -->
+  <g>
+    <circle cx="170" cy="330" r="7.4" fill="rgb(40,200,180)" stroke="#0d1b1a">
+      <animate attributeName="r" values="7.4;8.8;7.4" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="188" y="334" fill="#cfe8e6" font-size="10">models/user.rs · 105</text>
+  </g>
+  <!-- migrate.rs churn 85 (single owner, amber) -->
+  <g>
+    <circle cx="520" cy="300" r="6.6" fill="rgb(240,170,60)" stroke="#0d1b1a">
+      <animate attributeName="r" values="6.6;7.8;6.6" dur="2.3s" repeatCount="indefinite"/>
+    </circle>
