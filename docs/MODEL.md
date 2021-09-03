@@ -63,3 +63,23 @@ nf(f) = commits(f) / maxCommits    (0 if maxCommits == 0)
 score(f) = sqrt( nc(f) * nf(f) )   (geometric mean, range 0..1)
 ```
 
+The geometric mean is deliberate: a file that is huge but changed once
+(a vendored blob) scores low, and so does a file changed constantly by one-line
+tweaks. Only files that are *both* large and frequently edited rise to the top.
+This mirrors the "hotspot" idea popularized by Adam Tornhill's behavioural code
+analysis, adapted to the standard-library-only constraints of this tool.
+
+## Co-change / temporal coupling
+
+Two files are **temporally coupled** if they tend to change in the same commit.
+For an unordered pair `{a, b}`:
+
+```
+together(a,b) = number of commits that changed both a and b
+count(a)      = number of commits that changed a
+count(b)      = number of commits that changed b
+
+strength(a,b)   = together / (count(a) + count(b) - together)   (Jaccard index)
+confidence(a,b) = together / max(count(a), count(b))            (association rule)
+```
+
