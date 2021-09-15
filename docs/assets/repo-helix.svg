@@ -75,3 +75,16 @@
   </g>
   <!-- auth.rs churn 203 (2 authors, shared) -->
   <g>
+    <circle cx="170" cy="230" r="10.2" fill="rgb(40,200,180)" stroke="#0d1b1a">
+      <animate attributeName="r" values="10.2;12;10.2" dur="2.0s" repeatCount="indefinite"/>
+    </circle>
+    <text x="190" y="234" fill="#cfe8e6" font-size="10">auth.rs · 203</text>
+  </g>
+  <!-- config.rs churn 149 -->
+  <g>
+    <circle cx="440" cy="280" r="8.8" fill="rgb(52,198,170)" stroke="#0d1b1a">
+      <animate attributeName="r" values="8.8;10.4;8.8" dur="2.1s" repeatCount="indefinite"/>
+    </circle>
+    <text x="420" y="284" fill="#cfe8e6" font-size="10" text-anchor="end">config.rs · 149</text>
+  </g>
+  <!-- models/user.rs churn 105 -->
