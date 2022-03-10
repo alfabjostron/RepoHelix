@@ -32,3 +32,23 @@ simple and predictable; following renames is a possible future extension noted
 in the CHANGELOG.
 
 Binary files report `-`/`-` for line counts. `repohelix` treats a binary edit as
+**one unit of churn** so the file still registers activity without inventing
+line numbers.
+
+## Churn
+
+For a file `f`:
+
+```
+added(f)   = Σ added over all commits touching f
+removed(f) = Σ removed over all commits touching f
+churn(f)   = added(f) + removed(f)          (binary edits contribute 1 each)
+commits(f) = number of commits touching f
+```
+
+Churn is the crudest possible activity signal: how much text moved through a
+file. High churn is neither good nor bad. A parser generator, a lockfile, or a
+central dispatch module can all be legitimately high-churn.
+
+## Hotspots
+
