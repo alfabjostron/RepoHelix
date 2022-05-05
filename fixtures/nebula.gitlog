@@ -67,3 +67,11 @@
 45	30	src/handlers.rs
 20	15	src/storage.rs
 18	10	src/auth.rs
+REPOHELIX_COMMITd4000003Bo Tanakabo@nebula.example1705798800Add metrics endpoint
+55	0	src/metrics_ep.rs
+20	4	src/router.rs
+10	2	src/handlers.rs
+REPOHELIX_COMMITd4000004Ada Reyesada@nebula.example1705800600Config: env overrides
+35	20	src/config.rs
+8	3	src/main.rs
+REPOHELIX_COMMITd4000005Ada Reyesada@nebula.example1705802400Docs: architecture notes
