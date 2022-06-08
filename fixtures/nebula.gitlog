@@ -22,3 +22,11 @@
 REPOHELIX_COMMITb2000002Cy Okaforcy@nebula.example1704328200Storage: connection pooling
 55	8	src/storage.rs
 20	0	src/config.rs
+REPOHELIX_COMMITb2000003Ada Reyesada@nebula.example1704330000Handlers use storage
+40	6	src/handlers.rs
+30	4	src/storage.rs
+REPOHELIX_COMMITb2000004Ada Reyesada@nebula.example1704331800Add user model
+65	0	src/models/user.rs
+12	0	src/lib.rs
+REPOHELIX_COMMITb2000005Cy Okaforcy@nebula.example1704333600User CRUD in handlers
+80	10	src/handlers.rs
