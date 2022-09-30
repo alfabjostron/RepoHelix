@@ -32,3 +32,16 @@
     <path d="M120,90 C260,150 380,150 520,90 C380,240 260,240 120,300 C260,360 380,360 520,300"
           stroke="#2b6f6a" stroke-width="3" opacity="0.55" stroke-dasharray="6 10">
       <animate attributeName="stroke-dashoffset" values="0;-160" dur="6s" repeatCount="indefinite"/>
+    </path>
+    <path d="M520,90 C380,150 260,150 120,90 C260,240 380,240 520,300 C380,360 260,360 120,300"
+          stroke="#8a6a34" stroke-width="3" opacity="0.55" stroke-dasharray="6 10">
+      <animate attributeName="stroke-dashoffset" values="0;160" dur="6s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Rungs connecting the strands. -->
+  <g stroke="#1d3330" stroke-width="1.4" opacity="0.7">
+    <line x1="120" y1="90"  x2="520" y2="90"/>
+    <line x1="470" y1="130" x2="170" y2="130"/>
+    <line x1="200" y1="180" x2="440" y2="180"/>
+    <line x1="470" y1="230" x2="170" y2="230"/>
