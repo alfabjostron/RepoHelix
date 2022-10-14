@@ -184,3 +184,50 @@ ANALYZE OPTIONS
   --compact                 Compact JSON instead of pretty
   --max-commits <n>         Limit history depth (newest n commits)
   --out <file>              Write to a file instead of stdout
+  --min-cochange <n>        Minimum co-change count to report (default: 2)
+  --top-cochange <n>        Max co-change pairs (default: 40)
+  --top-hotspots <n>        Max hotspots (default: 20)
+  --cluster-gap <secs>      Session gap threshold (default: 21600 = 6h)
+  --max-files-cochange <n>  Skip huge commits for coupling (default: 40)
+```
+
+Every git invocation sets `GIT_PAGER=cat`, `GIT_TERMINAL_PROMPT=0`,
+`GIT_OPTIONAL_LOCKS=0`, `GIT_CONFIG_NOSYSTEM=1`, and `LC_ALL=C`, plus the
+`--no-pager --no-color --no-renames` flags. It will never open an editor, block
+on a prompt, or emit ANSI colour into your pipeline.
+
+---
+
+## What it computes
+
+A one-paragraph summary of each metric; the precise formulas live in
+[`docs/MODEL.md`](docs/MODEL.md).
+
+- **Churn** — total lines added plus removed per file. The rawest activity
+  signal. Binary edits count as one unit so they still register.
+- **Hotspots** — `sqrt(normalizedChurn · normalizedFrequency)`. Only files that
+  are *both* large and frequently edited rise to the top; a huge one-shot import
+  or a trivial repeated tweak both score low.
+- **Temporal coupling** — for a file pair, `strength = together / (a + b −
+  together)` (Jaccard) and `confidence = together / max(a, b)` (association
+  rule). Guarded by a minimum co-occurrence and a max-files-per-commit filter so
+  bulk commits don't manufacture fake coupling.
+- **Temporal clusters** — commits sorted by time and split wherever the gap
+  exceeds the threshold. Each cluster is a development *session* with its own
+  commit count, file span, and churn.
+- **Ownership concentration** — a normalized Herfindahl index of per-file commit
+  shares in `[0, 1]`. `1.0` = one identity made every change (bus factor of
+  one); low = shared stewardship. Identities are reported as anonymized labels.
+
+---
+
+## Output formats
+
+### Text
+
+A compact terminal report with a summary block and four ranked tables
+(hotspots, coupling, ownership, clusters). Every text report ends with the
+reminder that the metrics describe code, not people.
+
+### JSON (`schema: repohelix/analysis/v1`)
+
