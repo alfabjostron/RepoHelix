@@ -33,3 +33,14 @@
        0 handlers.rs (320,120)  1 router.rs (440,175)
        2 storage.rs (490,290)   3 config.rs (440,405)
        4 main.rs (320,460)      5 lib.rs (200,405)
+       6 auth.rs (150,290)      7 Cargo.toml (200,175)
+       Chord weight = 0.6 + 4*strength; opacity fades in staggered. -->
+  <g fill="none">
+    <!-- handlers.rs ↔ router.rs : strength 0.58 (strongest, straightest) -->
+    <path d="M320,120 Q356,242 440,175" stroke="rgb(154,192,110)" stroke-width="3.0" opacity="0">
+      <animate attributeName="opacity" values="0;0.72" dur="0.9s" begin="0.0s" fill="freeze"/>
+      <animate attributeName="stroke-width" values="3.0;3.6;3.0" dur="4s" begin="1s" repeatCount="indefinite"/>
+    </path>
+    <!-- handlers.rs ↔ storage.rs : strength 0.31 -->
+    <path d="M320,120 Q372,236 490,290" stroke="rgb(120,196,131)" stroke-width="1.85" opacity="0">
+      <animate attributeName="opacity" values="0;0.52" dur="0.9s" begin="0.25s" fill="freeze"/>
