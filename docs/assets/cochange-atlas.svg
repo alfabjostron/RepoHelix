@@ -46,3 +46,13 @@
       <animate attributeName="opacity" values="0;0.52" dur="0.9s" begin="0.25s" fill="freeze"/>
     </path>
     <!-- main.rs ↔ router.rs : strength 0.27 -->
+    <path d="M320,460 Q392,300 440,175" stroke="rgb(112,197,138)" stroke-width="1.7" opacity="0">
+      <animate attributeName="opacity" values="0;0.48" dur="0.9s" begin="0.45s" fill="freeze"/>
+    </path>
+    <!-- Cargo.toml ↔ lib.rs : strength 0.38 -->
+    <path d="M200,175 Q248,300 200,405" stroke="rgb(132,195,124)" stroke-width="2.1" opacity="0">
+      <animate attributeName="opacity" values="0;0.57" dur="0.9s" begin="0.65s" fill="freeze"/>
+    </path>
+    <!-- Cargo.toml ↔ storage.rs : strength 0.22 -->
+    <path d="M200,175 Q348,250 490,290" stroke="rgb(104,197,145)" stroke-width="1.5" opacity="0">
+      <animate attributeName="opacity" values="0;0.43" dur="0.9s" begin="0.85s" fill="freeze"/>
