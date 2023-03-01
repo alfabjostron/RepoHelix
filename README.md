@@ -155,3 +155,50 @@ Strongest temporal coupling (co-change)
    0.38  0.43 Cargo.toml                 src/lib.rs
    ...
 
+Note: these metrics describe code and change activity, not people.
+```
+
+`handlers.rs` is the clear hotspot, and `handlers.rs ↔ router.rs` is the tightest
+coupling — exactly what the fixture's story (a router wired to handlers, then
+repeatedly refactored together) is designed to reveal.
+
+---
+
+## The command line
+
+```
+repohelix <command> [options]
+
+COMMANDS
+  analyze        Analyze history and print a JSON or text report
+  viewer-data    Emit compact JSON for the TypeScript helix viewer
+  help           Show help
+  version        Show version
+
+SOURCE (pick one; defaults to --repo .)
+  --repo <dir>              Analyze a live Git repository
+  --log <file>              Import a captured/fixture git log file
+
+ANALYZE OPTIONS
+  --format <json|text>      Output format (default: text)
+  --compact                 Compact JSON instead of pretty
+  --max-commits <n>         Limit history depth (newest n commits)
+  --out <file>              Write to a file instead of stdout
+  --min-cochange <n>        Minimum co-change count to report (default: 2)
+  --top-cochange <n>        Max co-change pairs (default: 40)
+  --top-hotspots <n>        Max hotspots (default: 20)
+  --cluster-gap <secs>      Session gap threshold (default: 21600 = 6h)
+  --max-files-cochange <n>  Skip huge commits for coupling (default: 40)
+```
+
+Every git invocation sets `GIT_PAGER=cat`, `GIT_TERMINAL_PROMPT=0`,
+`GIT_OPTIONAL_LOCKS=0`, `GIT_CONFIG_NOSYSTEM=1`, and `LC_ALL=C`, plus the
+`--no-pager --no-color --no-renames` flags. It will never open an editor, block
+on a prompt, or emit ANSI colour into your pipeline.
+
+---
+
+## What it computes
+
+A one-paragraph summary of each metric; the precise formulas live in
+[`docs/MODEL.md`](docs/MODEL.md).
