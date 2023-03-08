@@ -140,3 +140,28 @@ mod tests {
 
     #[test]
     fn handles_binary_files() {
+        let h = parse_log(&sample_log());
+        let second = &h.commits[1];
+        let logo = second
+            .files
+            .iter()
+            .find(|f| f.path.ends_with("logo.png"))
+            .unwrap();
+        assert!(logo.is_binary());
+        assert_eq!(logo.churn(), 1);
+    }
+
+    #[test]
+    fn skips_empty_and_malformed() {
+        let raw = format!("{}   \n\n", COMMIT_SEP);
+        let h = parse_log(&raw);
+        assert!(h.is_empty());
+    }
+
+    #[test]
+    fn distinct_files_count() {
+        let h = parse_log(&sample_log());
+        // engine.rs, lib.rs, logo.png
+        assert_eq!(h.distinct_files(), 3);
+    }
+// review note
