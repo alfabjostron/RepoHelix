@@ -20,3 +20,14 @@
   <rect width="640" height="520" fill="url(#atlasbg)"/>
   <text x="24" y="34" fill="#cfe8e6" font-size="17" font-weight="600">repohelix · co-change atlas</text>
   <text x="24" y="52" fill="#7fa8a3" font-size="11">temporal coupling: files that change in the same commit</text>
+
+  <!-- Centre glow that breathes. -->
+  <circle cx="320" cy="290" r="150" fill="url(#core)">
+    <animate attributeName="r" values="130;165;130" dur="7s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Guide ring. -->
+  <circle cx="320" cy="290" r="170" fill="none" stroke="#1d3330" stroke-width="1.2" opacity="0.7"/>
+
+  <!-- Chords. Ring layout (8 slots, starting at top, clockwise):
+       0 handlers.rs (320,120)  1 router.rs (440,175)
