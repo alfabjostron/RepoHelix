@@ -221,3 +221,50 @@ A one-paragraph summary of each metric; the precise formulas live in
 
 ---
 
+## Output formats
+
+### Text
+
+A compact terminal report with a summary block and four ranked tables
+(hotspots, coupling, ownership, clusters). Every text report ends with the
+reminder that the metrics describe code, not people.
+
+### JSON (`schema: repohelix/analysis/v1`)
+
+A stable, sorted document with top-level keys `summary`, `files`, `cochanges`,
+`hotspots`, `ownership`, and `clusters`, plus a `disclaimer` string embedded in
+the payload itself. Pretty by default; `--compact` for pipelines.
+
+```jsonc
+{
+  "schema": "repohelix/analysis/v1",
+  "disclaimer": "Metrics describe file and change activity only. ...",
+  "summary": { "commits": 24, "files": 18, "authors": 4, "total_churn": 2744, "span_days": 20, ... },
+  "files":     [ { "path": "src/handlers.rs", "churn": 684, "commits": 10, "authors": 4, ... }, ... ],
+  "cochanges": [ { "a": "src/handlers.rs", "b": "src/router.rs", "strength": 0.583333, ... }, ... ],
+  "hotspots":  [ { "path": "src/handlers.rs", "score": 1.0, ... }, ... ],
+  "ownership": [ { "path": "src/migrate.rs", "concentration": 1.0, "top_identity_label": "author#4" }, ... ],
+  "clusters":  [ { "index": 0, "commits": 4, "files_touched": 7, "churn": 426, ... }, ... ]
+}
+```
+
+The bundled JSON writer (`src/json.rs`) escapes correctly, preserves key order,
+trims float noise, and emits `null` for non-finite numbers so the output is
+always valid JSON.
+
+### Viewer payload (`schema: repohelix/viewer/v1`)
+
+A minimal graph: `nodes` (files with churn/commits/authors/concentration/time),
+`links` (co-change pairs referencing node indices), and `clusters`. Capped at 64
+nodes so the browser render stays smooth and the file stays tiny.
+
+---
+
+## The interactive viewer
+
+The `viewer/` directory holds a dependency-free TypeScript app that renders the
+payload as the same helix + atlas you see at the top of this README — but
+interactive, with hover tooltips.
+
+```sh
+cd viewer
