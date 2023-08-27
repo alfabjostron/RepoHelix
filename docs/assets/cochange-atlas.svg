@@ -52,3 +52,14 @@
     <!-- Cargo.toml ↔ lib.rs : strength 0.38 -->
     <path d="M200,175 Q248,300 200,405" stroke="rgb(132,195,124)" stroke-width="2.1" opacity="0">
       <animate attributeName="opacity" values="0;0.57" dur="0.9s" begin="0.65s" fill="freeze"/>
+    </path>
+    <!-- Cargo.toml ↔ storage.rs : strength 0.22 -->
+    <path d="M200,175 Q348,250 490,290" stroke="rgb(104,197,145)" stroke-width="1.5" opacity="0">
+      <animate attributeName="opacity" values="0;0.43" dur="0.9s" begin="0.85s" fill="freeze"/>
+    </path>
+    <!-- lib.rs ↔ main.rs : strength 0.20 -->
+    <path d="M200,405 Q280,392 320,460" stroke="rgb(100,198,148)" stroke-width="1.4" opacity="0">
+      <animate attributeName="opacity" values="0;0.41" dur="0.9s" begin="1.05s" fill="freeze"/>
+    </path>
+    <!-- auth.rs ↔ handlers.rs : strength 0.17 -->
+    <path d="M150,290 Q268,210 320,120" stroke="rgb(96,198,151)" stroke-width="1.3" opacity="0">
