@@ -20,3 +20,23 @@ captured *fixture log* with identical structure). Each commit carries:
 | Field          | Source              | Notes                                        |
 | -------------- | ------------------- | -------------------------------------------- |
 | `hash`         | `%H`                | Commit identity.                             |
+| `author_name`  | `%an`               | Display name.                                |
+| `author_email` | `%ae`               | Preferred identity key (more stable).        |
+| `timestamp`    | `%at`               | Author time, Unix epoch seconds.             |
+| `subject`      | `%s`                | First line of the message.                   |
+| `files[]`      | `--numstat` rows    | Per-file `added`, `removed`, `path`.         |
+
+Renames are **not** followed (`--no-renames`). A renamed file therefore appears
+as a deletion of the old path and creation of the new one. This keeps the model
+simple and predictable; following renames is a possible future extension noted
+in the CHANGELOG.
+
+Binary files report `-`/`-` for line counts. `repohelix` treats a binary edit as
+**one unit of churn** so the file still registers activity without inventing
+line numbers.
+
+## Churn
+
+For a file `f`:
+
+```
