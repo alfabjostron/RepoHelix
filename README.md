@@ -136,3 +136,51 @@ repohelix — Git history analysis
 ================================
 
 Summary
+  commits ......... 24
+  files ........... 18
+  authors ......... 4
+  total churn ..... 2744
+  span (days) ..... 20
+
+Top hotspots (churn x frequency)
+  path                                       churn commits   score
+  src/handlers.rs                              684      10   1.000
+  src/router.rs                                410       9   0.734
+  src/storage.rs                               343       7   0.592
+  ...
+
+Strongest temporal coupling (co-change)
+    str  conf file A                     file B
+   0.58  0.70 src/handlers.rs            src/router.rs
+   0.38  0.43 Cargo.toml                 src/lib.rs
+   ...
+
+Note: these metrics describe code and change activity, not people.
+```
+
+`handlers.rs` is the clear hotspot, and `handlers.rs ↔ router.rs` is the tightest
+coupling — exactly what the fixture's story (a router wired to handlers, then
+repeatedly refactored together) is designed to reveal.
+
+---
+
+## The command line
+
+```
+repohelix <command> [options]
+
+COMMANDS
+  analyze        Analyze history and print a JSON or text report
+  viewer-data    Emit compact JSON for the TypeScript helix viewer
+  help           Show help
+  version        Show version
+
+SOURCE (pick one; defaults to --repo .)
+  --repo <dir>              Analyze a live Git repository
+  --log <file>              Import a captured/fixture git log file
+
+ANALYZE OPTIONS
+  --format <json|text>      Output format (default: text)
+  --compact                 Compact JSON instead of pretty
+  --max-commits <n>         Limit history depth (newest n commits)
+  --out <file>              Write to a file instead of stdout
