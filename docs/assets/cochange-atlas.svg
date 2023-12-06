@@ -65,3 +65,14 @@
     <path d="M150,290 Q268,210 320,120" stroke="rgb(96,198,151)" stroke-width="1.3" opacity="0">
       <animate attributeName="opacity" values="0;0.38" dur="0.9s" begin="1.25s" fill="freeze"/>
     </path>
+  </g>
+
+  <!-- Ring nodes with labels. Radius ~ churn. -->
+  <g stroke="#0d1b1a">
+    <circle cx="320" cy="120" r="14" fill="rgb(53,198,168)"/>
+    <circle cx="440" cy="175" r="12" fill="rgb(48,197,175)"/>
+    <circle cx="490" cy="290" r="11" fill="rgb(69,197,157)"/>
+    <circle cx="440" cy="405" r="8"  fill="rgb(52,198,170)"/>
+    <circle cx="320" cy="460" r="7"  fill="rgb(45,199,177)"/>
+    <circle cx="200" cy="405" r="7"  fill="rgb(45,199,177)"/>
+    <circle cx="150" cy="290" r="9"  fill="rgb(40,200,180)"/>
