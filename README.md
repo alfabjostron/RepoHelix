@@ -99,3 +99,50 @@ You need a recent Rust toolchain (1.70+; developed on 1.98) and a local `git`.
 # Build the release binary.
 cargo build --release
 # Binary lands at target/release/repohelix (.exe on Windows).
+
+# Or run straight from source during development.
+cargo run -- help
+```
+
+There is nothing else to install. The manifest has an intentionally empty
+`[dependencies]` table — `repohelix` is a pure standard-library program.
+
+---
+
+## Quick start (30 seconds)
+
+The repository ships with a synthetic fixture, `fixtures/nebula.gitlog`, modeling
+a small fictional web service. It exists so every demo and test is reproducible
+without a live repository.
+
+```sh
+# 1. Human-readable report of the fixture history.
+cargo run -- analyze --log fixtures/nebula.gitlog --format text
+
+# 2. Same analysis as pretty JSON.
+cargo run -- analyze --log fixtures/nebula.gitlog --format json
+
+# 3. Analyze THIS repository (or any Git repo).
+cargo run -- analyze --repo . --format text
+
+# 4. Emit the compact payload the browser viewer consumes.
+cargo run -- viewer-data --log fixtures/nebula.gitlog --out viewer/data.json
+```
+
+The text report for the fixture opens like this (abridged):
+
+```
+repohelix — Git history analysis
+================================
+
+Summary
+  commits ......... 24
+  files ........... 18
+  authors ......... 4
+  total churn ..... 2744
+  span (days) ..... 20
+
+Top hotspots (churn x frequency)
+  path                                       churn commits   score
+  src/handlers.rs                              684      10   1.000
+  src/router.rs                                410       9   0.734
