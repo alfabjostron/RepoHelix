@@ -91,3 +91,23 @@ confidence(a,b) = together / max(count(a), count(b))            (association rul
 
 Two guards keep coupling honest:
 
+1. `--min-cochange` (default 2): a pair must co-occur at least this many times
+   to be reported, filtering one-off coincidences.
+2. `--max-files-cochange` (default 40): commits touching more files than this
+   (bulk imports, vendor drops, formatting sweeps) are excluded from pair
+   counting, because they would manufacture spurious coupling between unrelated
+   files. Their singleton counts are still recorded so confidence denominators
+   stay correct.
+
+Temporal coupling is the tool's most actionable signal: strongly coupled files
+that live far apart in the directory tree often indicate a hidden dependency or
+a missing abstraction.
+
+## Temporal clusters (development sessions)
+
+Commits are sorted ascending by time. A new **cluster** begins whenever the gap
+to the previous commit exceeds `--cluster-gap` seconds (default `21600`, i.e.
+six hours). Each cluster reports its commit count, distinct files touched, and
+total churn.
+
+Clusters approximate *sessions* — bursts of related work such as a feature
