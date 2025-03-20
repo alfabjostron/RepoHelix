@@ -25,4 +25,12 @@
 REPOHELIX_COMMITb2000003Ada Reyesada@nebula.example1704330000Handlers use storage
 40	6	src/handlers.rs
 30	4	src/storage.rs
-
+REPOHELIX_COMMITb2000004Ada Reyesada@nebula.example1704331800Add user model
+65	0	src/models/user.rs
+12	0	src/lib.rs
+REPOHELIX_COMMITb2000005Cy Okaforcy@nebula.example1704333600User CRUD in handlers
+80	10	src/handlers.rs
+35	5	src/models/user.rs
+15	3	src/storage.rs
+REPOHELIX_COMMITc3000001Bo Tanakabo@nebula.example1704844800Add auth middleware
+95	0	src/auth.rs
