@@ -95,3 +95,24 @@ fn max_commits_limits_history() {
     let history = load_from_log(fixture_path(), Some(4)).unwrap();
     assert_eq!(history.commit_count(), 4);
 }
+
+#[test]
+fn viewer_links_have_valid_node_indices() {
+    let history = load_from_log(fixture_path(), None).unwrap();
+    let analysis = analyze(&history, &Params::default());
+    let node_count = analysis.file_stats.len().min(64);
+    let payload = viewer::build(&analysis, 64).to_compact();
+    // Every "source"/"target" index must be < node_count. We spot-check by
+    // parsing the compact JSON for the numbers after those keys.
+    for key in ["\"source\":", "\"target\":"] {
+        let mut idx = 0;
+        while let Some(pos) = payload[idx..].find(key) {
+            let start = idx + pos + key.len();
+            let rest = &payload[start..];
+            let end = rest.find([',', '}']).unwrap();
+            let num: usize = rest[..end].parse().unwrap();
+            assert!(num < node_count, "index {num} out of range");
+            idx = start + end;
+        }
+    }
+}
