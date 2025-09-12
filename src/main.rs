@@ -69,3 +69,19 @@ fn emit(out: Option<&Path>, content: &str) -> std::io::Result<()> {
                 if !parent.as_os_str().is_empty() {
                     std::fs::create_dir_all(parent)?;
                 }
+            }
+            std::fs::write(path, content)?;
+            let _ = writeln!(std::io::stderr(), "wrote {}", path.display());
+            Ok(())
+        }
+        None => {
+            let stdout = std::io::stdout();
+            let mut lock = stdout.lock();
+            lock.write_all(content.as_bytes())?;
+            if !content.ends_with('\n') {
+                lock.write_all(b"\n")?;
+            }
+            Ok(())
+        }
+    }
+// review note
