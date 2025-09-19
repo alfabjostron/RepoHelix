@@ -10,3 +10,13 @@
     <radialGradient id="atlasbg" cx="0.5" cy="0.45" r="0.6">
       <stop offset="0" stop-color="#123430"/>
       <stop offset="1" stop-color="#08100f"/>
+    </radialGradient>
+    <radialGradient id="core" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#43c8bd" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#43c8bd" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="640" height="520" fill="url(#atlasbg)"/>
+  <text x="24" y="34" fill="#cfe8e6" font-size="17" font-weight="600">repohelix · co-change atlas</text>
+  <text x="24" y="52" fill="#7fa8a3" font-size="11">temporal coupling: files that change in the same commit</text>
