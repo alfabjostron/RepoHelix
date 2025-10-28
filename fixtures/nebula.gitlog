@@ -39,4 +39,13 @@
 REPOHELIX_COMMITc3000002Bo Tanakabo@nebula.example1704846600Auth: token parsing
 40	12	src/auth.rs
 10	2	src/config.rs
-REPOHELIX_COMMIT
+REPOHELIX_COMMITc3000003Dee Marshdee@nebula.example1704848400Add session model
+50	0	src/models/session.rs
+20	8	src/auth.rs
+8	0	src/lib.rs
+REPOHELIX_COMMITc3000004Dee Marshdee@nebula.example1704850200Sessions in handlers
+60	15	src/handlers.rs
+30	5	src/models/session.rs
+12	3	src/router.rs
+REPOHELIX_COMMITc3000005Ada Reyesada@nebula.example1704852000Refactor handlers split
+120	90	src/handlers.rs
