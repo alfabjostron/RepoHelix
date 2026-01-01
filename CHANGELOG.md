@@ -43,3 +43,10 @@ dependency-free TypeScript viewer.
 - Renames are not followed; a rename appears as a delete + add.
 - The viewer renders the 64 busiest files; the full data is in the JSON report.
 
+### Planned
+
+- Optional rename-following (`git log --follow`-style) behind a flag.
+- Author-alias mapping (`.mailmap`) support for ownership grouping.
+- CSV export for spreadsheet workflows.
+
+// draft note 1
