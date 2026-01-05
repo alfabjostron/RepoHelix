@@ -53,3 +53,22 @@ demo: build ## Text report for the fixture
 demo-json: build ## JSON report for the fixture
 	$(CARGO) run --release -- analyze --log $(FIXTURE) --format json
 
+.PHONY: viewer-build
+viewer-build: ## Build the TypeScript viewer
+	cd viewer && npm install --no-audit --no-fund && npm run build
+
+.PHONY: viewer-test
+viewer-test: ## Run the TypeScript core tests
+	cd viewer && npm install --no-audit --no-fund && npm test
+
+.PHONY: viewer-data
+viewer-data: build ## Regenerate viewer/data.js from the fixture
+	$(CARGO) run --release -- viewer-data --log $(FIXTURE) --out viewer/data.json
+
+.PHONY: check
+check: fmt-check test ## Format check + tests
+
+.PHONY: clean
+clean: ## Remove build artifacts
+	$(CARGO) clean
+	rm -rf viewer/dist viewer/dist-test viewer/node_modules
