@@ -105,4 +105,4 @@ pub fn is_git_repo(repo: &Path) -> bool {
         .output()
         .map(|o| o.status.success())
         .unwrap_or(false)
-// review note
+}
