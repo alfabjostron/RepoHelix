@@ -177,3 +177,32 @@ mod tests {
     }
 
     #[test]
+    fn compact_object_is_stable() {
+        let v = Json::obj(vec![("b", Json::Int(2)), ("a", Json::Int(1))]);
+        // Insertion order is preserved (b before a).
+        assert_eq!(v.to_compact(), r#"{"b":2,"a":1}"#);
+    }
+
+    #[test]
+    fn floats_are_trimmed() {
+        assert_eq!(format_float(1.5000000), "1.5");
+        assert_eq!(format_float(2.0), "2.0");
+        assert_eq!(format_float(0.3333333), "0.333333");
+    }
+
+    #[test]
+    fn non_finite_is_null() {
+        assert_eq!(Json::Float(f64::NAN).to_compact(), "null");
+        assert_eq!(Json::Float(f64::INFINITY).to_compact(), "null");
+    }
+
+    #[test]
+    fn pretty_nested() {
+        let v = Json::obj(vec![(
+            "items",
+            Json::Array(vec![Json::Int(1), Json::Int(2)]),
+        )]);
+        let pretty = v.to_pretty();
+        assert!(pretty.contains("\n  \"items\": [\n"));
+    }
+}
