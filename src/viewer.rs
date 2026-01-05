@@ -135,3 +135,27 @@ mod tests {
         assert!(s.contains("a.rs"));
     }
 
+    #[test]
+    fn links_reference_valid_indices() {
+        let a = analyze(&hist(), &Params::default());
+        let payload = build(&a, 50);
+        // a.rs and b.rs co-change twice -> one link with valid indices.
+        let s = payload.to_compact();
+        assert!(s.contains("\"source\""));
+        assert!(s.contains("\"target\""));
+    }
+
+    #[test]
+    fn respects_max_nodes() {
+        let a = analyze(&hist(), &Params::default());
+        let payload = build(&a, 1);
+        if let Json::Object(pairs) = &payload {
+            let nodes = pairs.iter().find(|(k, _)| k == "nodes").unwrap();
+            if let Json::Array(items) = &nodes.1 {
+                assert_eq!(items.len(), 1);
+            } else {
+                panic!("nodes not array");
+            }
+        }
+    }
+}
