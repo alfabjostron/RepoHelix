@@ -85,3 +85,20 @@ pub fn load_from_repo(repo: &Path, max_commits: Option<usize>) -> Result<model::
 /// Load a [`model::History`] from a captured fixture log file.
 pub fn load_from_log(path: &Path, max_commits: Option<usize>) -> Result<model::History, Error> {
     let raw = fs::read_to_string(path)?;
+    let mut history = parse::parse_log(&raw);
+    if let Some(n) = max_commits {
+        history.commits.truncate(n);
+    }
+    Ok(history)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn missing_log_file_is_io_error() {
+        let err = load_from_log(Path::new("does-not-exist.log"), None).unwrap_err();
+        matches!(err, Error::Io(_));
+    }
+}
