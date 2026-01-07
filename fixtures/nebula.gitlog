@@ -15,3 +15,76 @@
 45	5	src/router.rs
 70	0	src/handlers.rs
 6	1	src/main.rs
+REPOHELIX_COMMITb2000001Cy Okaforcy@nebula.example1704326400Add storage module
+120	0	src/storage.rs
+9	0	src/lib.rs
+7	2	Cargo.toml
+REPOHELIX_COMMITb2000002Cy Okaforcy@nebula.example1704328200Storage: connection pooling
+55	8	src/storage.rs
+20	0	src/config.rs
+REPOHELIX_COMMITb2000003Ada Reyesada@nebula.example1704330000Handlers use storage
+40	6	src/handlers.rs
+30	4	src/storage.rs
+REPOHELIX_COMMITb2000004Ada Reyesada@nebula.example1704331800Add user model
+65	0	src/models/user.rs
+12	0	src/lib.rs
+REPOHELIX_COMMITb2000005Cy Okaforcy@nebula.example1704333600User CRUD in handlers
+80	10	src/handlers.rs
+35	5	src/models/user.rs
+15	3	src/storage.rs
+REPOHELIX_COMMITc3000001Bo Tanakabo@nebula.example1704844800Add auth middleware
+95	0	src/auth.rs
+25	4	src/router.rs
+18	6	src/handlers.rs
+REPOHELIX_COMMITc3000002Bo Tanakabo@nebula.example1704846600Auth: token parsing
+40	12	src/auth.rs
+10	2	src/config.rs
+REPOHELIX_COMMITc3000003Dee Marshdee@nebula.example1704848400Add session model
+50	0	src/models/session.rs
+20	8	src/auth.rs
+8	0	src/lib.rs
+REPOHELIX_COMMITc3000004Dee Marshdee@nebula.example1704850200Sessions in handlers
+60	15	src/handlers.rs
+30	5	src/models/session.rs
+12	3	src/router.rs
+REPOHELIX_COMMITc3000005Ada Reyesada@nebula.example1704852000Refactor handlers split
+120	90	src/handlers.rs
+40	0	src/handlers_user.rs
+25	4	src/router.rs
+REPOHELIX_COMMITc3000006Ada Reyesada@nebula.example1704853800Router: nested groups
+70	30	src/router.rs
+15	5	src/main.rs
+REPOHELIX_COMMITc3000007Cy Okaforcy@nebula.example1704855600Storage: migrations
+85	0	src/migrate.rs
+40	10	src/storage.rs
+6	0	Cargo.toml
+REPOHELIX_COMMITd4000001Dee Marshdee@nebula.example1705795200Add error types
+70	0	src/errors.rs
+30	20	src/handlers.rs
+15	8	src/storage.rs
+12	6	src/router.rs
+REPOHELIX_COMMITd4000002Dee Marshdee@nebula.example1705797000Propagate errors everywhere
+45	30	src/handlers.rs
+20	15	src/storage.rs
+18	10	src/auth.rs
+REPOHELIX_COMMITd4000003Bo Tanakabo@nebula.example1705798800Add metrics endpoint
+55	0	src/metrics_ep.rs
+20	4	src/router.rs
+10	2	src/handlers.rs
+REPOHELIX_COMMITd4000004Ada Reyesada@nebula.example1705800600Config: env overrides
+35	20	src/config.rs
+8	3	src/main.rs
+REPOHELIX_COMMITd4000005Ada Reyesada@nebula.example1705802400Docs: architecture notes
+120	10	README.md
+40	0	docs/ARCHITECTURE.md
+REPOHELIX_COMMITd4000006Cy Okaforcy@nebula.example1705804200Add integration tests
+90	0	tests/integration.rs
+15	5	src/lib.rs
+REPOHELIX_COMMITd4000007Dee Marshdee@nebula.example1705806000Fix router edge cases
+30	25	src/router.rs
+20	12	src/handlers.rs
+REPOHELIX_COMMITd4000008Bo Tanakabo@nebula.example1705807800Add logo asset
+-	-	assets/nebula-logo.png
+5	0	README.md
+
+// draft note 6
