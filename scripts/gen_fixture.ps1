@@ -83,3 +83,23 @@ $commits = @(
 
 $sb = New-Object System.Text.StringBuilder
 foreach ($c in $commits) {
+    $auth = $authors[$c.a]
+    [void]$sb.Append($SEP)
+    [void]$sb.Append($c.h + $FS + $auth[0] + $FS + $auth[1] + $FS + $c.t + $FS + $c.s + "`n")
+    foreach ($row in $c.f) {
+        # Convert the space-delimited spec into tab-delimited numstat.
+        $parts = $row -split ' ', 3
+        [void]$sb.Append($parts[0] + "`t" + $parts[1] + "`t" + $parts[2] + "`n")
+    }
+}
+
+$outDir = Join-Path $PSScriptRoot '..' | Join-Path -ChildPath 'fixtures'
+New-Item -ItemType Directory -Force -Path $outDir | Out-Null
+$outFile = Join-Path $outDir 'nebula.gitlog'
+
+# Write with UTF-8 (no BOM) so byte content is exactly as intended.
+$utf8 = New-Object System.Text.UTF8Encoding($false)
+[System.IO.File]::WriteAllText($outFile, $sb.ToString(), $utf8)
+Write-Host "Wrote $outFile ($($commits.Count) commits)"
+
+// draft note 7
