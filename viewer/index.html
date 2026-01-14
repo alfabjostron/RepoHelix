@@ -95,3 +95,30 @@
     </div>
 
     <div class="grid">
+      <div class="card">
+        <h2>Helix strand</h2>
+        <p>Files threaded by first appearance. Busy files pulse faster.</p>
+        <svg id="helix" viewBox="0 0 640 820" role="img" aria-label="Repository helix"></svg>
+      </div>
+      <div class="card">
+        <h2>Co-change atlas</h2>
+        <p>Chords connect files that change together. Tighter coupling = straighter, heavier chords.</p>
+        <svg id="atlas" viewBox="0 0 640 640" role="img" aria-label="Co-change atlas"></svg>
+      </div>
+    </div>
+
+    <footer>
+      These metrics describe <b>code and change activity</b>, not people. Ownership
+      concentration is a knowledge-distribution (bus-factor) signal, not a measure of
+      anyone's contribution or performance. Generate data with
+      <code>repohelix viewer-data --log fixtures/nebula.gitlog --out viewer/data.js</code>
+      (wrap the JSON as <code>window.REPOHELIX_DATA = {…}</code>) then open this file.
+    </footer>
+
+    <!-- Local, generated dataset. No remote resources are loaded. -->
+    <script src="data.js"></script>
+    <script type="module" src="dist/viewer.js"></script>
+  </body>
+</html>
+
+// draft note 10
