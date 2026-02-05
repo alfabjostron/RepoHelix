@@ -608,4 +608,4 @@ mod tests {
         assert_eq!(a.hotspots[0].path, "a.rs");
         assert!(a.hotspots[0].score > 0.0);
     }
-// review note
+}
