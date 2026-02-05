@@ -164,4 +164,4 @@ mod tests {
         // engine.rs, lib.rs, logo.png
         assert_eq!(h.distinct_files(), 3);
     }
-// review note
+}
