@@ -249,3 +249,41 @@ mod tests {
                 path: "a.rs".into(),
                 added: Some(3),
                 removed: Some(1),
+            }],
+        }])
+    }
+
+    #[test]
+    fn json_contains_schema_and_disclaimer() {
+        let a = analyze(&hist(), &Params::default());
+        let j = to_json(&a, false);
+        assert!(j.contains("repohelix/analysis/v1"));
+        assert!(j.contains("not"));
+        assert!(j.contains("\"summary\""));
+    }
+
+    #[test]
+    fn json_is_valid_roundtrippable_structure() {
+        let a = analyze(&hist(), &Params::default());
+        let j = to_json(&a, true);
+        // Pretty output should be balanced and contain nested arrays.
+        assert_eq!(j.matches('{').count(), j.matches('}').count());
+        assert_eq!(j.matches('[').count(), j.matches(']').count());
+    }
+
+    #[test]
+    fn text_report_has_sections() {
+        let a = analyze(&hist(), &Params::default());
+        let t = to_text(&a);
+        assert!(t.contains("Summary"));
+        assert!(t.contains("Top hotspots"));
+        assert!(t.contains("Ownership concentration"));
+        assert!(t.contains("not people"));
+    }
+
+    #[test]
+    fn truncate_short_and_long() {
+        assert_eq!(truncate("abc", 5), "abc");
+        assert_eq!(truncate("abcdefgh", 4), "…fgh");
+    }
+}
