@@ -84,4 +84,4 @@ fn emit(out: Option<&Path>, content: &str) -> std::io::Result<()> {
             Ok(())
         }
     }
-// review note
+}
