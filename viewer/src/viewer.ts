@@ -212,3 +212,39 @@ export function renderAtlas(
       svg.appendChild(label);
     }
   });
+}
+
+/** Populate the summary bar. */
+export function renderSummary(elm: HTMLElement, data: ViewerData): void {
+  elm.textContent = summaryText(data);
+}
+
+/** Wire everything up. */
+export function mount(root: Document, data: ViewerData): void {
+  const helixSvg = root.getElementById("helix") as unknown as SVGElement | null;
+  const atlasSvg = root.getElementById("atlas") as unknown as SVGElement | null;
+  const summary = root.getElementById("summary") as HTMLElement | null;
+
+  if (summary) renderSummary(summary, data);
+  if (helixSvg) renderHelix(helixSvg, data, { width: 640, height: 820 });
+  if (atlasSvg) renderAtlas(atlasSvg, data, { width: 640, height: 640 });
+}
+
+declare global {
+  interface Window {
+    REPOHELIX_DATA?: ViewerData;
+  }
+}
+
+if (typeof window !== "undefined" && typeof document !== "undefined") {
+  const boot = (): void => {
+    if (window.REPOHELIX_DATA) {
+      mount(document, window.REPOHELIX_DATA);
+    }
+  };
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+}
