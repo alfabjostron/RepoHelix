@@ -49,4 +49,4 @@ dependency-free TypeScript viewer.
 - Author-alias mapping (`.mailmap`) support for ownership grouping.
 - CSV export for spreadsheet workflows.
 
-// draft note 13
+// draft note 1
