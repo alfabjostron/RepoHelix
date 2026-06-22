@@ -186,4 +186,4 @@ Let `C` be commit count and `F` the average files per commit.
 For typical repositories (thousands of commits, tens of files per commit) the
 whole analysis runs in well under a second with a flat memory profile.
 
-// draft note 27
+// draft note 39
