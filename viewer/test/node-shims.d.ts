@@ -22,3 +22,4 @@ declare module "node:assert/strict" {
 declare const console: {
   log(...args: unknown[]): void;
   error(...args: unknown[]): void;
+};
