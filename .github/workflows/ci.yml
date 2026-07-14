@@ -68,5 +68,3 @@ jobs:
 
       - name: Run core tests
         run: npm test
-
-// draft note 33
