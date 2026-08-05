@@ -48,5 +48,3 @@ dependency-free TypeScript viewer.
 - Optional rename-following (`git log --follow`-style) behind a flag.
 - Author-alias mapping (`.mailmap`) support for ownership grouping.
 - CSV export for spreadsheet workflows.
-
-// draft note 37
