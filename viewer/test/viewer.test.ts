@@ -108,5 +108,3 @@ test("summaryText includes headline metrics", () => {
 });
 
 console.log(`\n${passed} tests passed`);
-
-// draft note 36
