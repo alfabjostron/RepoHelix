@@ -19,5 +19,3 @@ try {
 finally {
     Pop-Location
 }
-
-// draft note 32
