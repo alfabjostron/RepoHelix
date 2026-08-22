@@ -27,5 +27,3 @@ strip = true
 
 [dependencies]
 # Intentionally empty: repohelix depends only on the Rust standard library.
-
-// draft note 35
