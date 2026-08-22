@@ -446,5 +446,3 @@ shell-free logic; the helper scripts are PowerShell (`pwsh` runs cross-platform)
 MIT — see [`LICENSE`](LICENSE). Changelog in [`CHANGELOG.md`](CHANGELOG.md).
 
 <p align="center"><em>repohelix — the DNA and cartography of a codebase.</em></p>
-
-// draft note 38
